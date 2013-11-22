@@ -20,6 +20,10 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 	
+	
+	//toto tatz
+	
+	
 	private static final String TAG = "SudokuDebug_MainActivity";
 
 	private int curLevel = 0;
