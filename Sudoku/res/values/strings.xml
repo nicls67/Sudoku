@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Sudoku</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_generate">Nouvelle partie</string>
+    <string name="action_setLevel">Changer la difficulté</string>
+    <string name="action_restart">Recommencer</string>
+    <string name="text_remaining">Cases restantes</string>
+    <string name="auto_finish">Terminer la partie</string>
+</resources>
