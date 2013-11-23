@@ -32,7 +32,7 @@ public class SudokuTable {
 	public void build(){
 		remaining = level;
 		
-		
+		Log.d(TAG,"Starting generation");
 		do{
 			//put all values to 10
 			for(int i=0;i<9;i++){
@@ -43,6 +43,8 @@ public class SudokuTable {
 		}while(rand_generate()==false);
 		
 		delete();
+		
+		Log.d(TAG,"Generation completed");
 		
 		for(int i=0;i<9;i++){
 			for(int j=0;j<9;j++){
@@ -65,7 +67,6 @@ public class SudokuTable {
 	 * Generate a Sudoku table
 	 */
 	private boolean rand_generate(){
-
 		for(int i=0;i<9;i++){
 			
 			int lower = 1;
@@ -75,7 +76,7 @@ public class SudokuTable {
 			
 			for(int j=0;j<9;j++){
 				if(tab[i][j]==10){
-					Log.d(TAG, "generating random for "+String.valueOf(i)+","+String.valueOf(j));
+					//Log.d(TAG, "generating random for "+String.valueOf(i)+","+String.valueOf(j));
 					
 					//find a number between 1 and 9
 					while(checkPosition(i,j,random)==false){
@@ -109,7 +110,7 @@ public class SudokuTable {
 	 * @return true if it is possible to put the value at this position, false otherwise
 	 */
 	private boolean checkPosition(int x, int y, int val){
-		Log.d(TAG, "Testing value "+String.valueOf(val)+" at position "+String.valueOf(x)+","+String.valueOf(y));
+		//Log.d(TAG, "Testing value "+String.valueOf(val)+" at position "+String.valueOf(x)+","+String.valueOf(y));
 		boolean res = true;
 		
 		//check line
