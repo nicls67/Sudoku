@@ -3,14 +3,17 @@ package com.ns.sudoku;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,13 +21,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	
 	private static final String TAG = "SudokuDebug_MainActivity";
 	
-	private int curLevel = 0;
+	
 	private SudokuTable table=null;
 	private int itemSelectedX = 9, itemSelectedY = 9; // 0 to 8, 9 means nothing is selected
 	private Button b1=null, b2=null, b3=null, b4=null, b5=null, b6=null, b7=null, b8=null, b9=null, br=null, bd=null;
 	private TextView text_remaining=null;
 	private TextView[][] textTab;
-	final String[] levelList = {"Débutant","Facile","Moyen","Difficile"};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -159,6 +161,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			}
 		}
 		
+		//set default preferences
+		PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
+		
 		//creating table
 		table = new SudokuTable();
 		
@@ -179,9 +184,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		switch(item.getItemId()){
 		case R.id.generate:
 			askNewGame();
-			return true;
-		case R.id.setLevel:
-			setLevel();
 			return true;
 		case R.id.restart:
 			AlertDialog.Builder dialogRestart = new AlertDialog.Builder(this);
@@ -215,6 +217,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			  });
 			dialogFinish.show();
 			break;
+		case R.id.settings:
+			Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+			startActivity(intent);
+			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -238,52 +244,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		for(int i=0;i<9;i++){
 			for(int j=0;j<9;j++){
 				int v = table.getValue(i,j);
-				if(v!=10)
+				if(v!=10){
 					textTab[i][j].setText(String.valueOf(v));
-				else
+					textTab[i][j].setTypeface(null, Typeface.BOLD);
+				}
+				else{
 					textTab[i][j].setText("-");
+					textTab[i][j].setTypeface(null, Typeface.ITALIC);
+				}
 			}
 		}
-	}
-	
-	/**
-	 * Set level of the game
-	 */
-	private void setLevel(){
-		AlertDialog.Builder dialogSetLevel = new AlertDialog.Builder(this);
-		dialogSetLevel.setTitle("Changer la difficulté");
-		dialogSetLevel.setCancelable(true);
-		dialogSetLevel.setSingleChoiceItems(levelList,curLevel,null);
-		dialogSetLevel.setNegativeButton("Annuler",new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog,int id) {
-				dialog.cancel();
-			}
-		  });
-		dialogSetLevel.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog,int id) {
-				ListView lw = ((AlertDialog)dialog).getListView();
-				switch(lw.getCheckedItemPosition()){
-				case 0:
-					table.setLevel(3);
-					curLevel = 0;
-					break;
-				case 1:
-					table.setLevel(10);
-					curLevel = 1;
-					break;
-				case 2:
-					table.setLevel(20);
-					curLevel = 2;
-					break;
-				case 3:
-					table.setLevel(30);
-					curLevel = 3;
-					break;
-				}
-				askNewGame();
-			}
-		  });
-		dialogSetLevel.show();
 	}
 	
 	/**
@@ -291,6 +261,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	 */
 	private void generate(){
 		Log.d(TAG, "Generating table");
+		//fetch difficulty
+		SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		int lvl = Integer.valueOf(SP.getString("difficulty", "3"));
+		table.setLevel(lvl);
+		
 		//create a new table
 		table.build();
 		
@@ -316,6 +291,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 					itemSelectedY=j;
 					setDefaultBackgroundColor();
 					textTab[i][j].setBackgroundColor(Color.YELLOW);
+					
+					//change color of 
 					return;
 				}
 			}
@@ -425,19 +402,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    }
 	    text_remaining.setText(String.valueOf(table.getRemaining()));
 	}
-	
-	
-	
-	//Commenté temporairement jusqu'à sûr que devenu inutile
-	/* 
-	private int getYfromIndex(){
-		return itemSelected%9;
-	}
-	
-	private int getXfromIndex(){
-		return (int)itemSelected/9;
-	}*/
-	
+
 	/**
 	 * Process unselection of a box
 	 */
@@ -503,9 +468,21 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	}
 	
 	private void setDefaultBackgroundColor(){
+		//int r,g;
+		int c;
 		for(int i=0;i<9;i++){
 			for(int j=0;j<9;j++){
-				textTab[i][j].setBackgroundColor(Color.GRAY);
+				c=30;
+				if(i<3) ;
+				else if (i>5) c+=60;
+				else c+=30;
+				if(j<3) ;
+				else if (j>5) c+=60;
+				else c+=30;
+				if(table.isBase(i, j))
+					textTab[i][j].setBackgroundColor(Color.argb(80,c, c, c));
+				else
+					textTab[i][j].setBackgroundColor(Color.argb(45,c, c, c));
 			}
 		}
 	}

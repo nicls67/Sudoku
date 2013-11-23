@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="listDifficulty">
+        <item >Débutant</item>
+        <item >Facile</item>
+        <item >Moyen</item>
+        <item >Difficile</item>
+    </string-array>
+    <string-array name="DifficultyValues">
+        <item >3</item>
+        <item >10</item>
+        <item >20</item>
+        <item >30</item>
+    </string-array>
+    
+</resources>

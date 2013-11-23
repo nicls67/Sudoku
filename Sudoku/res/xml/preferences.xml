@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <ListPreference android:positiveButtonText="Ok" android:key="difficulty" android:negativeButtonText="Annuler" android:dialogTitle="Difficulté" android:title="Difficulté" android:entries="@array/listDifficulty" android:summary="Changer la difficulté du jeu" android:entryValues="@array/DifficultyValues"/>
+    
+
+</PreferenceScreen>

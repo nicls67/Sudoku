@@ -1,7 +1,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item android:id="@+id/generate" android:title='@string/action_generate'></item>
-    <item android:id="@+id/restart" android:title="@string/action_restart"></item><item android:id="@+id/auto_finish" android:title="@string/auto_finish"></item><item android:id="@+id/setLevel" android:title="@string/action_setLevel"></item>
+    <item android:id="@+id/restart" android:title="@string/action_restart"></item><item android:id="@+id/auto_finish" android:title="@string/auto_finish"></item>
+    <item android:id="@+id/settings" android:title="@string/action_settings"></item>
     
     
     
