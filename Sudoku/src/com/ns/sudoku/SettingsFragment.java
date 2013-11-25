@@ -3,6 +3,7 @@ package com.ns.sudoku;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -16,6 +17,7 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences);
 		updatePreference("difficulty");
+		updatePreference("color_on");
 	}
 	
 	@Override
@@ -68,6 +70,21 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
                 listPreference.setSummary(sum);
             }
         }
+        
+        else if(key.equals("color_on")){
+        	Preference preference = findPreference("color_on");
+        	if (preference instanceof CheckBoxPreference){
+        		CheckBoxPreference cbpref = (CheckBoxPreference)preference;
+        		boolean isChk = cbpref.isChecked();
+        		Preference prefSwitch = findPreference("color_mode");
+        		if(isChk)
+        			prefSwitch.setEnabled(true);
+        		else
+        			prefSwitch.setEnabled(false);
+        	}
+        }
+        
+        
     }
 
 }

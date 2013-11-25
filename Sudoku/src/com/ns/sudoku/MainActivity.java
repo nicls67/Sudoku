@@ -294,36 +294,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 					itemSelectedY=j;
 					setDefaultBackgroundColor();
 					
-					//change color of line and column
-					for(int k=0;k<9;k++){
-						if(table.isBase(i, k))
-							textTab[i][k].setBackgroundColor(Color.argb(150,255, 255, 60));
-						else
-							textTab[i][k].setBackgroundColor(Color.argb(60, 255, 255, 60));
-						
-						if(table.isBase(k, j))
-							textTab[k][j].setBackgroundColor(Color.argb(150,255, 255, 60));
-						else
-							textTab[k][j].setBackgroundColor(Color.argb(60, 255, 255, 60));
-					}
-					
-					//change color of current square -> find a corner of it and then parse all boxes
-					int x,y;
-					if(i<3)x=0;
-					else if(i>5)x=6;
-					else x=3;
-					if(j<3)y=0;
-					else if(j>5)y=6;
-					else y=3;
-					for(int k=x;k<x+3;k++){
-						for(int l=y;l<y+3;l++){
-							if(table.isBase(k, l))
-								textTab[k][l].setBackgroundColor(Color.argb(150,255, 255, 150));
-							else
-								textTab[k][l].setBackgroundColor(Color.argb(60, 255, 255, 150));
-						}
-					}
-						
+					ColorizeBlocks(i,j);
 						
 					textTab[i][j].setBackgroundColor(Color.YELLOW);
 					
@@ -505,45 +476,57 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	 * Set backgroud color of grid
 	 */
 	private void setDefaultBackgroundColor(){
+		boolean color_on = SP.getBoolean("color_on", true);
 		
-		boolean isColored = SP.getBoolean("color_mode", false);
-		
-		if(isColored==false){
-			int c;
-			for(int i=0;i<9;i++){
-				for(int j=0;j<9;j++){
-					c=40;
-					if(i<3) ;
-					else if (i>5) c+=80;
-					else c+=40;
-					if(j<3) ;
-					else if (j>5) c+=80;
-					else c+=40;
-					if(table.isBase(i, j))
-						textTab[i][j].setBackgroundColor(Color.argb(120,c, c, c));
-					else
-						textTab[i][j].setBackgroundColor(Color.argb(70,c, c, c));
+		if(color_on){
+			boolean isColored = SP.getBoolean("color_mode", false);
+			
+			if(isColored==false){
+				int c;
+				for(int i=0;i<9;i++){
+					for(int j=0;j<9;j++){
+						c=40;
+						if(i<3) ;
+						else if (i>5) c+=80;
+						else c+=40;
+						if(j<3) ;
+						else if (j>5) c+=80;
+						else c+=40;
+						if(table.isBase(i, j))
+							textTab[i][j].setBackgroundColor(Color.argb(120,c, c, c));
+						else
+							textTab[i][j].setBackgroundColor(Color.argb(70,c, c, c));
+					}
+				}
+			}
+			else{
+				int r,g;
+				for(int i=0;i<9;i++){
+					for(int j=0;j<9;j++){
+						if(i<3) r=0;
+						else if(i>5) r=255;
+						else r=128;
+						if(j<3) g=0;
+						else if(j>5) g=255;
+						else g=128;
+							
+						if(table.isBase(i, j))
+							textTab[i][j].setBackgroundColor(Color.argb(120,r, 128, g));
+						else
+							textTab[i][j].setBackgroundColor(Color.argb(70,r, 128, g));
+					}
 				}
 			}
 		}
+		
 		else{
-			int r,g;
 			for(int i=0;i<9;i++){
 				for(int j=0;j<9;j++){
-					if(i<3) r=0;
-					else if(i>5) r=255;
-					else r=128;
-					if(j<3) g=0;
-					else if(j>5) g=255;
-					else g=128;
-						
-					if(table.isBase(i, j))
-						textTab[i][j].setBackgroundColor(Color.argb(120,r, 128, g));
-					else
-						textTab[i][j].setBackgroundColor(Color.argb(70,r, 128, g));
+					textTab[i][j].setBackgroundColor(Color.WHITE);
 				}
 			}
 		}
+		
 		
 	}
 
@@ -557,10 +540,62 @@ public class MainActivity extends Activity implements View.OnClickListener {
       
         	else if(key.equals("difficulty"))
         		askNewGame();
+        	
+        	else if(key.equals("color_on"))
+        		setDefaultBackgroundColor();
+        	
+        	else if(key.equals("color_block")){
+        		if(itemSelectedX<8 && itemSelectedY<8)
+        			ColorizeBlocks(itemSelectedX,itemSelectedY);
+        	}
+        		
         }
     };
 	
-    
+    private void ColorizeBlocks(int i, int j){
+    	
+    	boolean isColored = SP.getBoolean("color_block", true);
+    	
+    	if(isColored){
+    		//change color of line and column
+    		for(int k=0;k<9;k++){
+    			if(table.isBase(i, k))
+    				textTab[i][k].setBackgroundColor(Color.argb(150,255, 255, 60));
+    			else
+    				textTab[i][k].setBackgroundColor(Color.argb(60, 255, 255, 60));
+    			
+    			if(table.isBase(k, j))
+    				textTab[k][j].setBackgroundColor(Color.argb(150,255, 255, 60));
+    			else
+    				textTab[k][j].setBackgroundColor(Color.argb(60, 255, 255, 60));
+    		}
+    		
+    		//change color of current square -> find a corner of it and then parse all boxes
+    		int x,y;
+    		if(i<3)x=0;
+    		else if(i>5)x=6;
+    		else x=3;
+    		if(j<3)y=0;
+    		else if(j>5)y=6;
+    		else y=3;
+    		for(int k=x;k<x+3;k++){
+    			for(int l=y;l<y+3;l++){
+    				if(table.isBase(k, l))
+    					textTab[k][l].setBackgroundColor(Color.argb(150,255, 255, 150));
+    				else
+    					textTab[k][l].setBackgroundColor(Color.argb(60, 255, 255, 150));
+    			}
+    		}
+    	}
+    	/*else{
+    		for(int k=0;k<9;k++){
+				for(int l=0;l<9;l++){
+					textTab[k][l].setBackgroundColor(Color.WHITE);
+				}
+			}
+    	}*/
+    	
+    }
     
     
 } //class MainActivity
