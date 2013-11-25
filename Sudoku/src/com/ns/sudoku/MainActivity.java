@@ -293,9 +293,40 @@ public class MainActivity extends Activity implements View.OnClickListener {
 					itemSelectedX=i;
 					itemSelectedY=j;
 					setDefaultBackgroundColor();
+					
+					//change color of line and column
+					for(int k=0;k<9;k++){
+						if(table.isBase(i, k))
+							textTab[i][k].setBackgroundColor(Color.argb(150,255, 255, 60));
+						else
+							textTab[i][k].setBackgroundColor(Color.argb(60, 255, 255, 60));
+						
+						if(table.isBase(k, j))
+							textTab[k][j].setBackgroundColor(Color.argb(150,255, 255, 60));
+						else
+							textTab[k][j].setBackgroundColor(Color.argb(60, 255, 255, 60));
+					}
+					
+					//change color of current square -> find a corner of it and then parse all boxes
+					int x,y;
+					if(i<3)x=0;
+					else if(i>5)x=6;
+					else x=3;
+					if(j<3)y=0;
+					else if(j>5)y=6;
+					else y=3;
+					for(int k=x;k<x+3;k++){
+						for(int l=y;l<y+3;l++){
+							if(table.isBase(k, l))
+								textTab[k][l].setBackgroundColor(Color.argb(150,255, 255, 150));
+							else
+								textTab[k][l].setBackgroundColor(Color.argb(60, 255, 255, 150));
+						}
+					}
+						
+						
 					textTab[i][j].setBackgroundColor(Color.YELLOW);
 					
-					//change color of 
 					return;
 				}
 			}
@@ -507,9 +538,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 					else g=128;
 						
 					if(table.isBase(i, j))
-						textTab[i][j].setBackgroundColor(Color.argb(120,r, g, 128));
+						textTab[i][j].setBackgroundColor(Color.argb(120,r, 128, g));
 					else
-						textTab[i][j].setBackgroundColor(Color.argb(70,r, g, 128));
+						textTab[i][j].setBackgroundColor(Color.argb(70,r, 128, g));
 				}
 			}
 		}
@@ -529,7 +560,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     };
 	
-
+    
     
     
 } //class MainActivity
