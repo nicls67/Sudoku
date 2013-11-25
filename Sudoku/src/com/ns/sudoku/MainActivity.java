@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -21,7 +22,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	
 	private static final String TAG = "SudokuDebug_MainActivity";
 	
-	
+	private SharedPreferences SP;
 	private SudokuTable table=null;
 	private int itemSelectedX = 9, itemSelectedY = 9; // 0 to 8, 9 means nothing is selected
 	private Button b1=null, b2=null, b3=null, b4=null, b5=null, b6=null, b7=null, b8=null, b9=null, br=null, bd=null;
@@ -163,6 +164,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		
 		//set default preferences
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
+		SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		SP.registerOnSharedPreferenceChangeListener(preferenceListener);
 		
 		//creating table
 		table = new SudokuTable();
@@ -467,24 +470,66 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		text_remaining.setText(String.valueOf(table.getRemaining()));
 	}
 	
+	/**
+	 * Set backgroud color of grid
+	 */
 	private void setDefaultBackgroundColor(){
-		//int r,g;
-		int c;
-		for(int i=0;i<9;i++){
-			for(int j=0;j<9;j++){
-				c=30;
-				if(i<3) ;
-				else if (i>5) c+=60;
-				else c+=30;
-				if(j<3) ;
-				else if (j>5) c+=60;
-				else c+=30;
-				if(table.isBase(i, j))
-					textTab[i][j].setBackgroundColor(Color.argb(80,c, c, c));
-				else
-					textTab[i][j].setBackgroundColor(Color.argb(45,c, c, c));
+		
+		boolean isColored = SP.getBoolean("color_mode", false);
+		
+		if(isColored==false){
+			int c;
+			for(int i=0;i<9;i++){
+				for(int j=0;j<9;j++){
+					c=40;
+					if(i<3) ;
+					else if (i>5) c+=80;
+					else c+=40;
+					if(j<3) ;
+					else if (j>5) c+=80;
+					else c+=40;
+					if(table.isBase(i, j))
+						textTab[i][j].setBackgroundColor(Color.argb(120,c, c, c));
+					else
+						textTab[i][j].setBackgroundColor(Color.argb(70,c, c, c));
+				}
 			}
 		}
+		else{
+			int r,g;
+			for(int i=0;i<9;i++){
+				for(int j=0;j<9;j++){
+					if(i<3) r=0;
+					else if(i>5) r=255;
+					else r=128;
+					if(j<3) g=0;
+					else if(j>5) g=255;
+					else g=128;
+						
+					if(table.isBase(i, j))
+						textTab[i][j].setBackgroundColor(Color.argb(120,r, g, 128));
+					else
+						textTab[i][j].setBackgroundColor(Color.argb(70,r, g, 128));
+				}
+			}
+		}
+		
 	}
 
+	
+	public OnSharedPreferenceChangeListener preferenceListener = new OnSharedPreferenceChangeListener() {        
+
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        	if(key.equals("color_mode"))
+        		setDefaultBackgroundColor();
+      
+        	else if(key.equals("difficulty"))
+        		askNewGame();
+        }
+    };
+	
+
+    
+    
 } //class MainActivity

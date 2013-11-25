@@ -25,7 +25,7 @@
         <activity
             android:name="com.ns.sudoku.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName="android.preference.PreferenceActivity" >
+            android:parentActivityName="MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="android.preference.PreferenceActivity" />
