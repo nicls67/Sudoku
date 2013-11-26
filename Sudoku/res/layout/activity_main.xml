@@ -119,7 +119,7 @@
     <!-- TextViews -->
     
     <!-- Line 1 -->
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView1"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -128,7 +128,7 @@
         android:layout_alignParentTop="true"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView2"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -139,7 +139,7 @@
         android:text="Large Text"
         />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView3"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -150,7 +150,7 @@
         android:text="Large Text"
         />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView4"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -161,7 +161,7 @@
         android:text="Large Text"
         />
     
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView5"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -172,7 +172,7 @@
         android:text="Large Text"
         />
     
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView6"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -183,7 +183,7 @@
         android:text="Large Text"
         />
     
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView7"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -194,7 +194,7 @@
         android:text="Large Text"
         />
     
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView8"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -205,7 +205,7 @@
         android:text="Large Text"
         />
     
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView9"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -220,7 +220,7 @@
     
     <!-- Line 2 -->
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView21"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -229,7 +229,7 @@
         android:layout_below="@+id/textView2"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView22"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -239,7 +239,7 @@
         android:layout_toRightOf="@+id/textView21"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView23"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -249,7 +249,7 @@
         android:layout_toRightOf="@+id/textView22"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView24"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -259,7 +259,7 @@
         android:layout_toRightOf="@+id/textView23"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView25"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -269,7 +269,7 @@
         android:layout_toRightOf="@+id/textView24"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView26"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -279,7 +279,7 @@
         android:layout_toRightOf="@+id/textView25"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView27"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -289,7 +289,7 @@
         android:layout_toRightOf="@+id/textView26"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView28"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -299,7 +299,7 @@
         android:layout_toRightOf="@+id/textView27"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView29"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -317,7 +317,7 @@
     
     <!-- Line 3 -->
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView31"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -326,7 +326,7 @@
         android:layout_below="@+id/textView22"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView32"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -336,7 +336,7 @@
         android:layout_toRightOf="@+id/textView31"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView33"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -346,7 +346,7 @@
         android:layout_toRightOf="@+id/textView32"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView34"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -356,7 +356,7 @@
         android:layout_toRightOf="@+id/textView33"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView35"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -366,7 +366,7 @@
         android:layout_toRightOf="@+id/textView34"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView36"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -376,7 +376,7 @@
         android:layout_toRightOf="@+id/textView35"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView37"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -386,7 +386,7 @@
         android:layout_toRightOf="@+id/textView36"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView38"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -396,7 +396,7 @@
         android:layout_toRightOf="@+id/textView37"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView39"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -412,7 +412,7 @@
     
     <!-- Line 4 -->
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView41"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -421,7 +421,7 @@
         android:layout_below="@+id/textView32"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView42"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -431,7 +431,7 @@
         android:layout_toRightOf="@+id/textView41"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView43"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -441,7 +441,7 @@
         android:layout_toRightOf="@+id/textView42"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView44"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -451,7 +451,7 @@
         android:layout_toRightOf="@+id/textView43"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView45"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -461,7 +461,7 @@
         android:layout_toRightOf="@+id/textView44"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView46"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -471,7 +471,7 @@
         android:layout_toRightOf="@+id/textView45"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView47"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -481,7 +481,7 @@
         android:layout_toRightOf="@+id/textView46"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView48"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -491,7 +491,7 @@
         android:layout_toRightOf="@+id/textView47"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView49"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -506,7 +506,7 @@
     
     <!-- Line 5 -->
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView52"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -516,7 +516,7 @@
         android:layout_toRightOf="@+id/textView51"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView53"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -526,7 +526,7 @@
         android:layout_toRightOf="@+id/textView52"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView54"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -536,7 +536,7 @@
         android:layout_toRightOf="@+id/textView53"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView55"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -546,7 +546,7 @@
         android:layout_toRightOf="@+id/textView54"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView56"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -556,7 +556,7 @@
         android:layout_toRightOf="@+id/textView55"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView57"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -566,7 +566,7 @@
         android:layout_toRightOf="@+id/textView56"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView58"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -576,7 +576,7 @@
         android:layout_toRightOf="@+id/textView57"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView59"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -586,7 +586,7 @@
         android:layout_toRightOf="@+id/textView58"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView51"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -600,7 +600,7 @@
     
     <!-- Line 6 -->
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView62"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -610,7 +610,7 @@
         android:layout_toRightOf="@+id/textView61"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView63"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -620,7 +620,7 @@
         android:layout_toRightOf="@+id/textView62"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView64"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -630,7 +630,7 @@
         android:layout_toRightOf="@+id/textView63"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView65"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -640,7 +640,7 @@
         android:layout_toRightOf="@+id/textView64"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView66"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -650,7 +650,7 @@
         android:layout_toRightOf="@+id/textView65"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView67"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -660,7 +660,7 @@
         android:layout_toRightOf="@+id/textView66"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView68"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -670,7 +670,7 @@
         android:layout_toRightOf="@+id/textView67"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView69"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -680,7 +680,7 @@
         android:layout_toRightOf="@+id/textView68"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView61"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -694,7 +694,7 @@
     
     <!-- Line 7 -->
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView72"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -704,7 +704,7 @@
         android:layout_toRightOf="@+id/textView71"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView73"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -714,7 +714,7 @@
         android:layout_toRightOf="@+id/textView72"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView74"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -724,7 +724,7 @@
         android:layout_toRightOf="@+id/textView73"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView75"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -734,7 +734,7 @@
         android:layout_toRightOf="@+id/textView74"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView76"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -744,7 +744,7 @@
         android:layout_toRightOf="@+id/textView75"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView77"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -754,7 +754,7 @@
         android:layout_toRightOf="@+id/textView76"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView78"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -764,7 +764,7 @@
         android:layout_toRightOf="@+id/textView77"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView79"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -774,7 +774,7 @@
         android:layout_toRightOf="@+id/textView78"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView71"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -788,7 +788,7 @@
     
     <!-- Line 8 -->
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView82"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -798,7 +798,7 @@
         android:layout_toRightOf="@+id/textView81"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView83"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -808,7 +808,7 @@
         android:layout_toRightOf="@+id/textView82"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView84"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -818,7 +818,7 @@
         android:layout_toRightOf="@+id/textView83"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView85"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -828,7 +828,7 @@
         android:layout_toRightOf="@+id/textView84"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView86"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -838,7 +838,7 @@
         android:layout_toRightOf="@+id/textView85"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView87"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -848,7 +848,7 @@
         android:layout_toRightOf="@+id/textView86"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView88"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -858,7 +858,7 @@
         android:layout_toRightOf="@+id/textView87"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView89"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -868,7 +868,7 @@
         android:layout_toRightOf="@+id/textView88"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView81"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -880,7 +880,7 @@
     
     <!-- Line 9 -->
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView92"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -890,7 +890,7 @@
         android:layout_toRightOf="@+id/textView91"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView93"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -900,7 +900,7 @@
         android:layout_toRightOf="@+id/textView92"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView94"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -910,7 +910,7 @@
         android:layout_toRightOf="@+id/textView93"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView95"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -920,7 +920,7 @@
         android:layout_toRightOf="@+id/textView94"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView96"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -930,7 +930,7 @@
         android:layout_toRightOf="@+id/textView95"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView97"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -940,7 +940,7 @@
         android:layout_toRightOf="@+id/textView96"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView98"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -950,7 +950,7 @@
         android:layout_toRightOf="@+id/textView97"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView99"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
@@ -960,7 +960,7 @@
         android:layout_toRightOf="@+id/textView98"
         android:text="Large Text" />
 
-    <TextView
+    <com.ns.sudoku.BorderedTextView
         android:id="@+id/textView91"
         android:layout_width="@dimen/sudoku_boxes_size"
         android:layout_height="@dimen/sudoku_boxes_size"
