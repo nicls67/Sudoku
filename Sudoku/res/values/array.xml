@@ -6,11 +6,17 @@
         <item >Moyen</item>
         <item >Difficile</item>
     </string-array>
-    <string-array name="DifficultyValues">
-        <item >3</item>
-        <item >10</item>
-        <item >20</item>
-        <item >30</item>
+    <string-array name="DifficultyId">
+        <item >DEB</item>
+        <item >EASY</item>
+        <item >MEDIUM</item>
+        <item >HARD</item>
     </string-array>
+    <integer-array name="DifficultyValue">
+        <item >40</item>
+        <item >46</item>
+        <item >51</item>
+        <item >56</item>
+    </integer-array>
     
 </resources>

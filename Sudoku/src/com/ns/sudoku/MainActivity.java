@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private Button b1=null, b2=null, b3=null, b4=null, b5=null, b6=null, b7=null, b8=null, b9=null, br=null, bd=null;
 	private TextView text_remaining=null;
 	private BorderedTextView[][] textTab;
+	private int[] difficultyValue;
 	
 	//for border creation
 	private static final int BORDER_TOP = 0x00000001;
@@ -322,6 +324,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			}
 		}
 		
+		//get resources
+		Resources res = getResources();
+		difficultyValue = res.getIntArray(R.array.DifficultyValue);
+		
 		//set default preferences
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
 		SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -426,8 +432,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		Log.d(TAG, "Generating table");
 		//fetch difficulty
 		SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-		int lvl = Integer.valueOf(SP.getString("difficulty", "3"));
-		table.setLevel(lvl);
+		String lvl = SP.getString("difficulty", "DEB");
+		if(lvl.equals("DEB"))
+			table.setLevel(difficultyValue[0]);
+		else if(lvl.equals("EASY"))
+			table.setLevel(difficultyValue[1]);
+		else if(lvl.equals("MEDIUM"))
+			table.setLevel(difficultyValue[2]);
+		else if(lvl.equals("HARD"))
+			table.setLevel(difficultyValue[3]);
 		
 		//create a new table
 		table.build();
@@ -680,9 +693,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		}
 		
 		else{
+			boolean color_base = SP.getBoolean("color_base", false);
 			for(int i=0;i<9;i++){
 				for(int j=0;j<9;j++){
-					textTab[i][j].setBackgroundColor(Color.WHITE);
+					if(table.isBase(i, j) && color_base)
+						textTab[i][j].setBackgroundColor(Color.LTGRAY);
+					else
+						textTab[i][j].setBackgroundColor(Color.WHITE);
 				}
 			}
 		}
@@ -701,13 +718,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
         	else if(key.equals("difficulty"))
         		askNewGame();
         	
-        	else if(key.equals("color_on"))
+        	else if(key.equals("color_on") || key.equals("color_base"))
         		setDefaultBackgroundColor();
         	
-        	else if(key.equals("color_block")){
+        	else if(key.equals("color_block") || key.equals("color_digits")){
         		if(itemSelectedX<8 && itemSelectedY<8)
         			ColorizeBlocks(itemSelectedX,itemSelectedY);
         	}
+        		
         		
         }
     };
@@ -720,6 +738,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private void ColorizeBlocks(int i, int j){
     	
     	boolean isColored = SP.getBoolean("color_block", true);
+    	boolean isDigitColored = SP.getBoolean("color_digits", true);
     	
     	if(isColored){
     		//change color of line and column
@@ -759,6 +778,19 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				}
 			}
     	}*/
+    	
+    	if(isDigitColored){
+    		int val = table.getValue(i, j);
+    		if(val!=10){
+    			for(int k=0;k<9;k++){
+    				for(int l=0;l<9;l++){
+    					if(table.getValue(k, l)==val)
+    						textTab[k][l].setBackgroundColor(Color.CYAN);
+    				}
+    			}
+    		}
+    		
+    	}
     	
     }
     

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-    <ListPreference android:positiveButtonText="Ok" android:key="difficulty" android:negativeButtonText="Annuler" android:dialogTitle="Difficulté" android:title="Difficulté" android:entries="@array/listDifficulty" android:summary="Changer la difficulté du jeu" android:entryValues="@array/DifficultyValues"/>
+    <ListPreference android:positiveButtonText="Ok" android:key="difficulty" android:negativeButtonText="Annuler" android:dialogTitle="Difficulté" android:title="Difficulté" android:entries="@array/listDifficulty" android:summary="Changer la difficulté du jeu" android:entryValues="@array/DifficultyId"/>
     
-    <PreferenceCategory android:title="Affichage"><CheckBoxPreference android:key="color_on" android:title="Colorier la grille"/><SwitchPreference android:title="Couleur de la grille" android:summaryOff="Noir et blanc" android:key="color_mode" android:summaryOn="Couleur" />
+    <PreferenceCategory android:title="Affichage"><CheckBoxPreference android:summary="Surligne les blocs dont fait partie la case sélectionnée" android:key="color_block" android:title="Colorer les blocs" /><CheckBoxPreference android:key="color_digits" android:summary="Surligne les cases qui contiennent le chiffre sélectionné" android:title="Surligner chiffres"/><CheckBoxPreference android:key="color_on" android:title="Colorier la grille" android:defaultValue="false"/><CheckBoxPreference android:key="color_base" android:title="Surligner les cases de départ"/><SwitchPreference android:title="Couleur de la grille" android:summaryOff="Noir et blanc" android:key="color_mode" android:summaryOn="Couleur" />
     
-    <CheckBoxPreference android:summary="Colore les blocs dont fait partie la case sélectionnée" android:key="color_block" android:title="Colorer les blocs"/>
+    
+    
+    
 </PreferenceCategory>
     
 

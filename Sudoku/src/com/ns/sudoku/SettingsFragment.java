@@ -9,7 +9,6 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 
 public class SettingsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
-
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -28,8 +27,8 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
             .unregisterOnSharedPreferenceChangeListener(this);
     }
 	
-	 @Override
-	  public void onResume() {
+	@Override
+	public void onResume() {
 	      super.onResume();
 
 	      // Set up a listener whenever a key changes
@@ -38,8 +37,7 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 	  }
 	
 	@Override
-	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
-            String key) {
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         updatePreference(key);
     }
 	
@@ -48,25 +46,19 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
             Preference preference = findPreference(key);
             if (preference instanceof ListPreference){
             	ListPreference listPreference =  (ListPreference)preference;
-            	int val = Integer.valueOf(listPreference.getValue());
+            	String val = listPreference.getValue();
             	String sum;
-            	switch(val){
-            	case 3:
+            	if(val.equals("DEB"))
             		sum = "Débutant";
-            		break;
-            	case 10:
+            	else if(val.equals("EASY"))
             		sum = "Facile";
-            		break;
-            	case 20:
+            	else if(val.equals("MEDIUM"))
             		sum = "Moyen";
-            		break;
-            	case 30:
+            	else if(val.equals("HARD"))
             		sum = "Difficile";
-            		break;
-            	default:
+            	else
             		sum = "Changer la difficulté du jeu";
-            		break;
-               	}
+            		
                 listPreference.setSummary(sum);
             }
         }
@@ -77,14 +69,18 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
         		CheckBoxPreference cbpref = (CheckBoxPreference)preference;
         		boolean isChk = cbpref.isChecked();
         		Preference prefSwitch = findPreference("color_mode");
-        		if(isChk)
+        		Preference prefColorBase = findPreference("color_base");
+        		if(isChk){
         			prefSwitch.setEnabled(true);
-        		else
+        			prefColorBase.setEnabled(false);
+        		}
+        		else{
         			prefSwitch.setEnabled(false);
+        			prefColorBase.setEnabled(true);
+        		}
         	}
-        }
-        
-        
+        }  
+     
     }
 
 }
