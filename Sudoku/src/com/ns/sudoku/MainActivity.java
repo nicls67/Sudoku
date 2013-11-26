@@ -30,6 +30,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private TextView text_remaining=null;
 	private BorderedTextView[][] textTab;
 	private int[] difficultyValue;
+	private String difficulty="EASY";
 	
 	//for border creation
 	private static final int BORDER_TOP = 0x00000001;
@@ -327,6 +328,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		//get resources
 		Resources res = getResources();
 		difficultyValue = res.getIntArray(R.array.DifficultyValue);
+		Bundle b = getIntent().getExtras();
+		difficulty = b.getString("difficulty");
 		
 		//set default preferences
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
@@ -431,15 +434,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private void generate(){
 		Log.d(TAG, "Generating table");
 		//fetch difficulty
-		SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-		String lvl = SP.getString("difficulty", "DEB");
-		if(lvl.equals("DEB"))
+		if(difficulty.equals("DEB"))
 			table.setLevel(difficultyValue[0]);
-		else if(lvl.equals("EASY"))
+		else if(difficulty.equals("EASY"))
 			table.setLevel(difficultyValue[1]);
-		else if(lvl.equals("MEDIUM"))
+		else if(difficulty.equals("MEDIUM"))
 			table.setLevel(difficultyValue[2]);
-		else if(lvl.equals("HARD"))
+		else if(difficulty.equals("HARD"))
 			table.setLevel(difficultyValue[3]);
 		
 		//create a new table
@@ -714,9 +715,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         	if(key.equals("color_mode"))
         		setDefaultBackgroundColor();
-      
-        	else if(key.equals("difficulty"))
-        		askNewGame();
         	
         	else if(key.equals("color_on") || key.equals("color_base"))
         		setDefaultBackgroundColor();

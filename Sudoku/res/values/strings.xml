@@ -9,4 +9,6 @@
     <string name="action_restart">Recommencer</string>
     <string name="text_remaining">Cases restantes</string>
     <string name="auto_finish">Terminer la partie</string>
+    <string name="title_activity_start">Sudoku</string>
+
 </resources>

@@ -15,7 +15,6 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 		
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences);
-		updatePreference("difficulty");
 		updatePreference("color_on");
 	}
 	
@@ -42,28 +41,7 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
     }
 	
 	private void updatePreference(String key){
-        if (key.equals("difficulty")){
-            Preference preference = findPreference(key);
-            if (preference instanceof ListPreference){
-            	ListPreference listPreference =  (ListPreference)preference;
-            	String val = listPreference.getValue();
-            	String sum;
-            	if(val.equals("DEB"))
-            		sum = "Débutant";
-            	else if(val.equals("EASY"))
-            		sum = "Facile";
-            	else if(val.equals("MEDIUM"))
-            		sum = "Moyen";
-            	else if(val.equals("HARD"))
-            		sum = "Difficile";
-            	else
-            		sum = "Changer la difficulté du jeu";
-            		
-                listPreference.setSummary(sum);
-            }
-        }
-        
-        else if(key.equals("color_on")){
+		if(key.equals("color_on")){
         	Preference preference = findPreference("color_on");
         	if (preference instanceof CheckBoxPreference){
         		CheckBoxPreference cbpref = (CheckBoxPreference)preference;

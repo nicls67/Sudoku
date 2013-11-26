@@ -65,15 +65,6 @@
         android:text="1" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button1"
-        android:layout_alignBottom="@+id/button1"
-        android:layout_toRightOf="@+id/button4"
-        android:text="2" />
-
-    <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -968,6 +959,14 @@
         android:layout_alignLeft="@+id/button1"
         android:layout_below="@+id/textView82"
         android:text="Large Text" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button4"
+        android:layout_toRightOf="@+id/button4"
+        android:text="2" />
     
 </RelativeLayout>
 

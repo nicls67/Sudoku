@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="listDifficulty">
-        <item >Débutant</item>
-        <item >Facile</item>
-        <item >Moyen</item>
-        <item >Difficile</item>
-    </string-array>
-    <string-array name="DifficultyId">
-        <item >DEB</item>
-        <item >EASY</item>
-        <item >MEDIUM</item>
-        <item >HARD</item>
-    </string-array>
     <integer-array name="DifficultyValue">
         <item >40</item>
         <item >46</item>
