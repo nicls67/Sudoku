@@ -84,7 +84,7 @@ public class SudokuTable {
 						random = (int)(Math.random()*(higher+1-lower))+lower;
 						count++;
 						
-						if(count>100)
+						if(count>80)
 							return false;
 					}
 					
@@ -111,18 +111,20 @@ public class SudokuTable {
 	 */
 	private boolean checkPosition(int x, int y, int val){
 		//Log.d(TAG, "Testing value "+String.valueOf(val)+" at position "+String.valueOf(x)+","+String.valueOf(y));
-		boolean res = true;
+		
+		if(val==10)
+			return false;
 		
 		//check line
 		for(int i=0;i<9;i++){
 			if(tab[i][y]==val)
-				res=false;
+				return false;
 		}
 		
 		//check column
 		for(int i=0;i<9;i++){
 			if(tab[x][i]==val)
-				res=false;
+				return false;
 		}
 		
 		//check square, first find square bounds, then parse the square for checking
@@ -208,12 +210,12 @@ public class SudokuTable {
 		for(int i=x_low;i<=x_high;i++){
 			for(int j=y_low;j<=y_high;j++){
 				if(tab[i][j]==val)
-					res=false;
+					return false;
 			}
 		}
 		
 		
-		return res;
+		return true;
 	}
 	
 	/**
