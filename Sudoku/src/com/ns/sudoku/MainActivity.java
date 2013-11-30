@@ -389,6 +389,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			  });
 			dialogFinish.show();
 			break;
+		case R.id.colorRemainingBox:
+			for(int i=0;i<9;i++){
+				for(int j=0;j<9;j++){
+					if(table.getValue(i, j)==10)
+						textTab[i][j].setBackgroundColor(Color.GREEN);
+				}
+			}
+			break;
 		case R.id.settings:
 			Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
 			startActivity(intent);

@@ -57,7 +57,7 @@ public class SudokuTable {
 	 * Returns a value of the table
 	 * @param x horizontal coordinate
 	 * @param y vertical coordinate
-	 * @return the value at the corresponding coordinates
+	 * @return the value at the corresponding coordinates, 10 if the box is free
 	 */
 	public int getValue(int x, int y){
 		return tab[x][y];

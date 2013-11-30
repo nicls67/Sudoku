@@ -2,7 +2,8 @@
 
     <item android:id="@+id/generate" android:title='@string/action_generate'></item>
     <item android:id="@+id/restart" android:title="@string/action_restart"></item><item android:id="@+id/auto_finish" android:title="@string/auto_finish"></item>
-    <item android:id="@+id/settings" android:title="@string/action_settings"></item>
+    <item android:id="@+id/colorRemainingBox" android:title="@string/colorRemainingBoxes"></item><item android:id="@+id/settings" android:title="@string/action_settings"></item>
+    
     
     
     
