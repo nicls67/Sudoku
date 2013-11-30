@@ -332,7 +332,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		difficulty = b.getString("difficulty");
 		
 		//set default preferences
-		PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
 		SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		SP.registerOnSharedPreferenceChangeListener(preferenceListener);
 		
@@ -342,6 +341,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		text_remaining = (TextView) findViewById(R.id.boxes_remaining);
 		
 		generate();
+		
 	}
 
 	@Override
@@ -610,7 +610,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		  });
 		dialogEnd.setNegativeButton("Non", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog,int id) {
-				MainActivity.this.finish();
+				setResult(1);
+				finish();
 			}
 		  });
 		dialogEnd.show();

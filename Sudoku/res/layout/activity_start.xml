@@ -7,7 +7,17 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".StartActivity" >
-
+    
+    <Button
+        android:id="@+id/buttonMed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/buttonEasy"
+        android:layout_below="@+id/buttonEasy"
+        android:gravity="center_vertical|center_horizontal|start"
+        android:minWidth="100dp"
+        android:text="Moyen" /> 
+    
     <Button
         android:id="@+id/buttonDeb"
         android:layout_width="wrap_content"
@@ -19,15 +29,7 @@
         android:minWidth="100dp"
         android:text="Débutant" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="Nouvelle partie :"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
 
     <Button
         android:id="@+id/buttonEasy"
@@ -39,16 +41,12 @@
         android:minWidth="100dp"
         android:text="Facile" />
 
-    <Button
-        android:id="@+id/buttonMed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/buttonEasy"
-        android:layout_below="@+id/buttonEasy"
-        android:gravity="center_vertical|center_horizontal|start"
-        android:minWidth="100dp"
-        android:text="Moyen" />
+    
+    
+    
 
+    
+    
     <Button
         android:id="@+id/buttonHard"
         android:layout_width="wrap_content"
@@ -58,5 +56,40 @@
         android:gravity="center_vertical|center_horizontal|start"
         android:minWidth="100dp"
         android:text="Difficile" />
+
+    <TextView
+        android:id="@+id/textViewResumeGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/buttonHard"
+        android:layout_marginTop="20dp"
+        android:text="Pas de partie en cours" />
+
+    <Button
+        android:id="@+id/buttonPref"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="Options" />
+
+    <Button
+        android:id="@+id/buttonResume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewResumeGame"
+        android:layout_below="@+id/textViewResumeGame"
+        android:text="Continuer" />
+    
+    <TextView
+        android:id="@+id/textViewNewGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Nouvelle partie :"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

@@ -2,14 +2,22 @@ package com.ns.sudoku;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class StartActivity extends Activity implements OnClickListener {
 
-	private Button b_deb=null, b_easy=null, b_med=null, b_hard=null;
+	private static final int CODE_MAIN_ACTIVITY = 1;
+	private Button b_deb=null, b_easy=null, b_med=null, b_hard=null, b_pref=null, b_resume=null;
+	private TextView text_resume=null;
+	private SharedPreferences SP=null;
+	String gameExists="none";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -17,43 +25,115 @@ public class StartActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_start);
 		
 		b_deb = (Button)findViewById(R.id.buttonDeb);
-		b_easy = (Button)findViewById(R.id.buttonEasy);
+		b_easy = (Button)findViewById(R.id.buttonEasy); 
 		b_med = (Button)findViewById(R.id.buttonMed);
 		b_hard = (Button)findViewById(R.id.buttonHard);
+		b_pref = (Button)findViewById(R.id.buttonPref);
+		b_resume = (Button)findViewById(R.id.buttonResume);
+		text_resume = (TextView)findViewById(R.id.textViewResumeGame);
 		
 		b_deb.setOnClickListener(this);
 		b_easy.setOnClickListener(this);
 		b_med.setOnClickListener(this);
 		b_hard.setOnClickListener(this);
+		b_pref.setOnClickListener(this);
+		b_resume.setOnClickListener(this);
+		
+		PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
+		SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		//SP.registerOnSharedPreferenceChangeListener(preferenceListener);
+		gameExists = SP.getString("gameExists", "none");
+		
+		setTextGameResume(gameExists);
+			
 	}
 
 	@Override
 	public void onClick(View v) {
-		String diff="EASY";
 		switch(v.getId()){
 		case R.id.buttonDeb:
-			diff="DEB";
+			startGame("DEB");
 			break;
 		case R.id.buttonEasy:
-			diff="EASY";
+			startGame("EASY");
 			break;
 		case R.id.buttonMed:
-			diff="MEDIUM";
+			startGame("MEDIUM");
 			break;
 		case R.id.buttonHard:
-			diff="HARD";
+			startGame("HARD");
+			break;
+		case R.id.buttonPref:
+			Intent launchPrefActivity = new Intent(getApplicationContext(),SettingsActivity.class);
+			startActivity(launchPrefActivity);
+			break;
+		case R.id.buttonResume:
 			break;
 		}
-		Intent launchMainActivity= new Intent(getApplicationContext(),MainActivity.class);
+		
+	}
+	
+	private void startGame(String diff){
+		SharedPreferences.Editor SPE = SP.edit();
+		SPE.putString("gameExists", diff) 
+			.commit();
+		setTextGameResume(diff);
+		
+		Intent launchMainActivity = new Intent(getApplicationContext(),MainActivity.class);
 		launchMainActivity.putExtra("difficulty", diff);
-		startActivity(launchMainActivity);
+		startActivityForResult(launchMainActivity,CODE_MAIN_ACTIVITY);
 	}
 
-	/*@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.start, menu);
-		return true;
-	}*/
+	/*public OnSharedPreferenceChangeListener preferenceListener = new OnSharedPreferenceChangeListener() {        
+
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        	if(key.equals("gameExists")){
+        		SP.getString("gameExists", "none");
+        		if(gameExists.equals("DEB"))
+        			text_resume.setText("Une partie en cours (Débutant)");
+        		else if(gameExists.equals("EASY"))
+        			text_resume.setText("Une partie en cours (Facile)");
+        		else if(gameExists.equals("MEDIUM"))
+        			text_resume.setText("Une partie en cours (Moyen)");
+        		else if(gameExists.equals("HARD"))
+        			text_resume.setText("Une partie en cours (Difficile)");
+        		else{
+        			text_resume.setText("Pas de partie en cours");
+        			b_resume.setEnabled(false);
+        		}
+        	}	
+        		
+        }
+    };*/
+	
+	
+	private void setTextGameResume(String gameExists){
+		if(gameExists.equals("DEB"))
+			text_resume.setText("Une partie en cours (Débutant)");
+		else if(gameExists.equals("EASY"))
+			text_resume.setText("Une partie en cours (Facile)");
+		else if(gameExists.equals("MEDIUM"))
+			text_resume.setText("Une partie en cours (Moyen)");
+		else if(gameExists.equals("HARD"))
+			text_resume.setText("Une partie en cours (Difficile)");
+		else{
+			text_resume.setText("Pas de partie en cours");
+			b_resume.setEnabled(false);
+		}
+	}
+	
+	@Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+		switch(requestCode){
+		case CODE_MAIN_ACTIVITY:
+			if(resultCode==1){//game is finished
+				SharedPreferences.Editor SPE = SP.edit();
+				SPE.putString("gameExists", "none") 
+					.commit();
+				setTextGameResume("none");
+			}
+		}
+	}
 
 }

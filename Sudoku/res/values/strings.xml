@@ -10,5 +10,6 @@
     <string name="text_remaining">Cases restantes</string>
     <string name="auto_finish">Terminer la partie</string>
     <string name="title_activity_start">Sudoku</string>
+    <string name="title_activity_settings">Paramètres</string>
 
 </resources>
