@@ -3,7 +3,6 @@ package com.ns.sudoku;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -68,16 +67,19 @@ public class StartActivity extends Activity implements OnClickListener {
 			startActivity(launchPrefActivity);
 			break;
 		case R.id.buttonResume:
+			startGame("RESUME");
 			break;
 		}
 		
 	}
 	
 	private void startGame(String diff){
-		SharedPreferences.Editor SPE = SP.edit();
-		SPE.putString("gameExists", diff) 
-			.commit();
-		setTextGameResume(diff);
+		
+		if(!diff.equals("RESUME")){
+			SharedPreferences.Editor SPE = SP.edit();
+			SPE.putString("gameExists", diff).commit();
+			setTextGameResume(diff);
+		}
 		
 		Intent launchMainActivity = new Intent(getApplicationContext(),MainActivity.class);
 		launchMainActivity.putExtra("difficulty", diff);
@@ -109,14 +111,22 @@ public class StartActivity extends Activity implements OnClickListener {
 	
 	
 	private void setTextGameResume(String gameExists){
-		if(gameExists.equals("DEB"))
+		if(gameExists.equals("DEB")){
 			text_resume.setText("Une partie en cours (Débutant)");
-		else if(gameExists.equals("EASY"))
+			b_resume.setEnabled(true);
+		}
+		else if(gameExists.equals("EASY")){
 			text_resume.setText("Une partie en cours (Facile)");
-		else if(gameExists.equals("MEDIUM"))
+			b_resume.setEnabled(true);
+		}
+		else if(gameExists.equals("MEDIUM")){
 			text_resume.setText("Une partie en cours (Moyen)");
-		else if(gameExists.equals("HARD"))
+			b_resume.setEnabled(true);
+		}
+		else if(gameExists.equals("HARD")){
 			text_resume.setText("Une partie en cours (Difficile)");
+			b_resume.setEnabled(true);
+		}
 		else{
 			text_resume.setText("Pas de partie en cours");
 			b_resume.setEnabled(false);

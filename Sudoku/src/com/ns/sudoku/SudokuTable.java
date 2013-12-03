@@ -3,7 +3,15 @@
  */
 package com.ns.sudoku;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * Class representing a Sudoku table
@@ -16,7 +24,8 @@ public class SudokuTable {
 	private int tab[][];
 	private int tab_base[][];
 	private int level =3;
-	private int remaining=level;;
+	private int remaining=level;
+	private SharedPreferences SP=null;
 	
 	/**
 	 * Constructor
@@ -24,6 +33,12 @@ public class SudokuTable {
 	public SudokuTable() {
 		tab = new int[9][9];
 		tab_base = new int[9][9];
+	}
+	
+	public SudokuTable(Context context) {
+		tab = new int[9][9];
+		tab_base = new int[9][9];
+		SP = PreferenceManager.getDefaultSharedPreferences(context);
 	}
 	
 	/**
@@ -34,10 +49,10 @@ public class SudokuTable {
 		
 		Log.d(TAG,"Starting generation");
 		do{
-			//put all values to 10
+			//put all values to 0
 			for(int i=0;i<9;i++){
 				for(int j=0;j<9;j++){
-					tab[i][j]=10;
+					tab[i][j]=0;
 				}
 			}
 		}while(rand_generate()==false);
@@ -57,7 +72,7 @@ public class SudokuTable {
 	 * Returns a value of the table
 	 * @param x horizontal coordinate
 	 * @param y vertical coordinate
-	 * @return the value at the corresponding coordinates, 10 if the box is free
+	 * @return the value at the corresponding coordinates, 0 if the box is free
 	 */
 	public int getValue(int x, int y){
 		return tab[x][y];
@@ -71,11 +86,11 @@ public class SudokuTable {
 			
 			int lower = 1;
 			int higher = 9;
-			int random=10;
+			int random=0;
 			int count = 0;
 			
 			for(int j=0;j<9;j++){
-				if(tab[i][j]==10){
+				if(tab[i][j]==0){
 					//Log.d(TAG, "generating random for "+String.valueOf(i)+","+String.valueOf(j));
 					
 					//find a number between 1 and 9
@@ -112,7 +127,7 @@ public class SudokuTable {
 	private boolean checkPosition(int x, int y, int val){
 		//Log.d(TAG, "Testing value "+String.valueOf(val)+" at position "+String.valueOf(x)+","+String.valueOf(y));
 		
-		if(val==10)
+		if(val==0)
 			return false;
 		
 		//check line
@@ -258,12 +273,12 @@ public class SudokuTable {
 		
 		for(int i=1;i<=level;i++){
 			
-			while(tab[randomX][randomY]==10){
+			while(tab[randomX][randomY]==0){
 				randomX = (int)(Math.random()*(higher+1-lower))+lower;
 				randomY = (int)(Math.random()*(higher+1-lower))+lower;
 			}
 			
-			tab[randomX][randomY]=10;
+			tab[randomX][randomY]=0;
 		}
 		
 		
@@ -275,7 +290,7 @@ public class SudokuTable {
 	 * @param y vertical coordinate
 	 */
 	public void delete_value(int x,int y){
-		tab[x][y]=10;
+		tab[x][y]=0;
 		remaining++;
 	}
 
@@ -313,7 +328,7 @@ public class SudokuTable {
 	 * @return true if the box is a base box, false otherwise
 	 */
 	public boolean isBase(int x, int y){
-		if(tab_base[x][y]==10)
+		if(tab_base[x][y]==0)
 			return false;
 		else
 			return true;
@@ -343,13 +358,105 @@ public class SudokuTable {
 		}
 		
 		//clone to tab_base
-		for(int i=0;i<9;i++){
+		/*for(int i=0;i<9;i++){
 			for(int j=0;j<9;j++){
 				tab_base[i][j]=tab[i][j];
 			}
-		}
+		}*/
 		
 		remaining=0;
+	}
+	
+	
+	
+	/**
+	 * Save the current game in shared preferences
+	 */
+	public void save(){
+		//Log.d(TAG, "Saving table");
+		
+		Set<String> set = new HashSet<String>();
+		
+		String s_tab = "";
+		String s_tab_base = "0";
+		for(int i=0;i<9;i++){
+			for(int j=0;j<9;j++){
+				s_tab += String.valueOf(tab[i][j]);
+				s_tab_base += String.valueOf(tab_base[i][j]);
+			}
+		}
+		
+		Log.d(TAG, "s_tab size = "+s_tab.length());
+		Log.d(TAG, s_tab);
+		Log.d(TAG, "s_tab_base size = "+s_tab_base.length());
+		Log.d(TAG, s_tab_base);
+		
+		set.add(s_tab);
+		set.add(s_tab_base);
+		set.add(String.valueOf(level));
+		
+		SharedPreferences.Editor SPE = SP.edit();
+		SPE.putStringSet("gameSaved", set).commit();
+		
+		Log.d(TAG, "Table saved successfully");
+	}
+	
+	
+	
+	/**
+	 * Load saved game from shared preferences
+	 */
+	public void load(){
+		//Log.d(TAG, "Loading table");
+		
+		Set<String> set = SP.getStringSet("gameSaved",null);
+		Iterator<String> iterator = set.iterator();
+		
+		String s_tab = null, s_tab_base = null, str;
+		
+		while(iterator.hasNext()){
+			str = iterator.next();
+			switch(str.length()){
+			case 81:
+				s_tab = str;
+				break;
+			case 82:
+				s_tab_base = str;
+				break;
+			case 2:
+				level = Integer.valueOf(str);
+				break;
+			}
+		}
+		
+		Log.d(TAG, "set size : "+set.size());
+		Log.d(TAG, "s_tab size = "+s_tab.length());
+		Log.d(TAG, s_tab);
+		Log.d(TAG, "s_tab_base size = "+s_tab_base.length());
+		Log.d(TAG, s_tab);
+		Log.d(TAG, "remaining : "+level);
+		
+		int pos=0;
+		remaining=0;
+		for(int i=0;i<9;i++){
+			for(int j=0;j<9;j++){
+				tab[i][j]=Integer.valueOf(s_tab.substring(pos, pos+1));
+				if(tab[i][j]==0)
+					remaining++;
+				tab_base[i][j]=Integer.valueOf(s_tab_base.substring(pos+1, pos+2));
+				pos++;
+			}
+		}
+		
+		Log.d(TAG, "Table loaded successfully");		
+	}
+	
+	/**
+	 * Get game level
+	 * @return level
+	 */
+	public int getLevel(){
+		return level;
 	}
 	
 }//class SudokuTable

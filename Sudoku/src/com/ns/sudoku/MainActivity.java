@@ -336,7 +336,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		SP.registerOnSharedPreferenceChangeListener(preferenceListener);
 		
 		//creating table
-		table = new SudokuTable();
+		table = new SudokuTable(getBaseContext());
 		
 		text_remaining = (TextView) findViewById(R.id.boxes_remaining);
 		
@@ -392,7 +392,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		case R.id.colorRemainingBox:
 			for(int i=0;i<9;i++){
 				for(int j=0;j<9;j++){
-					if(table.getValue(i, j)==10)
+					if(table.getValue(i, j)==0)
 						textTab[i][j].setBackgroundColor(Color.GREEN);
 				}
 			}
@@ -424,14 +424,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		for(int i=0;i<9;i++){
 			for(int j=0;j<9;j++){
 				int v = table.getValue(i,j);
-				if(v!=10){
+				if(v!=0)
 					textTab[i][j].setText(String.valueOf(v));
-					textTab[i][j].setTypeface(null, Typeface.BOLD);
-				}
-				else{
+				else
 					textTab[i][j].setText("-");
+				
+				if(table.isBase(i, j))
+					textTab[i][j].setTypeface(null, Typeface.BOLD);
+				else
 					textTab[i][j].setTypeface(null, Typeface.ITALIC);
-				}
 			}
 		}
 	}
@@ -440,7 +441,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	* Generate a sudoku table and update display
 	 */
 	private void generate(){
-		Log.d(TAG, "Generating table");
+		Log.d(TAG, "difficulty = "+difficulty);
 		//fetch difficulty
 		if(difficulty.equals("DEB"))
 			table.setLevel(difficultyValue[0]);
@@ -451,8 +452,20 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		else if(difficulty.equals("HARD"))
 			table.setLevel(difficultyValue[3]);
 		
-		//create a new table
-		table.build();
+		
+		if(difficulty.equals("RESUME")){
+			table.load();
+			if(table.getLevel()==difficultyValue[0])
+				difficulty="DEB";
+			else if(table.getLevel()==difficultyValue[1])
+				difficulty="EASY";
+			else if(table.getLevel()==difficultyValue[2])
+				difficulty="MEDIUM";
+			else if(table.getLevel()==difficultyValue[3])
+				difficulty="HARD";
+		}
+		else
+			table.build();
 		
 		//refresh grid
 		updateGrid();
@@ -788,7 +801,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     	
     	if(isDigitColored){
     		int val = table.getValue(i, j);
-    		if(val!=10){
+    		if(val!=0){
     			for(int k=0;k<9;k++){
     				for(int l=0;l<9;l++){
     					if(table.getValue(k, l)==val)
@@ -800,6 +813,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
     	}
     	
     }
+    
+    @Override
+    public void onPause(){
+    	super.onPause();
+    	table.save();
+    	Log.d(TAG, "MainActivity paused");
+    }
+    
+    
     
     
 } //class MainActivity
