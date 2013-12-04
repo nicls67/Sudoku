@@ -349,7 +349,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		}
 		
 		if(itemSelectedX>8 || itemSelectedY>8){
-			Toast.makeText(getApplicationContext(), "Sélectionnez d'abord une case", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "SÃ©lectionnez d'abord une case", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		
@@ -369,7 +369,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
 	    			isErrorColored=true;
 	    		}
-	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 1 à cet endroit", Toast.LENGTH_SHORT).show();
+	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 1 Ã  cet endroit", Toast.LENGTH_SHORT).show();
 	    	}
 	    	break;
 	    case R.id.button2:
@@ -383,7 +383,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
 	    			isErrorColored=true;
 	    		}
-	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 2 à cet endroit", Toast.LENGTH_SHORT).show();
+	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 2 Ã  cet endroit", Toast.LENGTH_SHORT).show();
 	    	}
 	    	break;
 	    case R.id.button3:
@@ -397,7 +397,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
 	    			isErrorColored=true;
 	    		}
-	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 3 à cet endroit", Toast.LENGTH_SHORT).show();
+	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 3 Ã  cet endroit", Toast.LENGTH_SHORT).show();
 	    	}
 	    	break;
 	    case R.id.button4:
@@ -411,7 +411,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
 	    			isErrorColored=true;
 	    		}
-	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 4 à cet endroit", Toast.LENGTH_SHORT).show();
+	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 4 Ã  cet endroit", Toast.LENGTH_SHORT).show();
 	    	}
 	    	break;
 	    case R.id.button5:
@@ -425,7 +425,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
 	    			isErrorColored=true;
 	    		}
-	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 5 à cet endroit", Toast.LENGTH_SHORT).show();
+	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 5 Ã  cet endroit", Toast.LENGTH_SHORT).show();
 	    	}
 	    	break;
 	    case R.id.button6:
@@ -439,7 +439,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
 	    			isErrorColored=true;
 	    		}
-	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 6 à cet endroit", Toast.LENGTH_SHORT).show();
+	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 6 Ã  cet endroit", Toast.LENGTH_SHORT).show();
 	    	}
 	    	break;
 	    case R.id.button7:
@@ -453,7 +453,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
 	    			isErrorColored=true;
 	    		}
-	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 7 à cet endroit", Toast.LENGTH_SHORT).show();
+	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 7 Ã  cet endroit", Toast.LENGTH_SHORT).show();
 	    	}
 	    	break;
 	    case R.id.button8:
@@ -467,7 +467,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
 	    			isErrorColored=true;
 	    		}
-	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 8 à cet endroit", Toast.LENGTH_SHORT).show();
+	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 8 Ã  cet endroit", Toast.LENGTH_SHORT).show();
 	    	}
 	    	break;
 	    case R.id.button9:
@@ -481,7 +481,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
 	    			isErrorColored=true;
 	    		}
-	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 9 à cet endroit", Toast.LENGTH_SHORT).show();
+	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 9 Ã  cet endroit", Toast.LENGTH_SHORT).show();
 	    	}
 	    	break;
 	    case R.id.buttonR:
@@ -518,7 +518,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		
 		Log.d(TAG, "Game finished");
 		AlertDialog.Builder dialogEnd = new AlertDialog.Builder(this);
-		dialogEnd.setTitle("Partie terminée !");
+		dialogEnd.setTitle("Partie terminï¿½e !");
 		dialogEnd.setMessage("Voulez-vous commencer une nouvelle partie ?");
 		dialogEnd.setCancelable(false);
 		dialogEnd.setPositiveButton("Oui", new DialogInterface.OnClickListener() {

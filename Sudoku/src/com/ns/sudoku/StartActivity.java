@@ -93,7 +93,7 @@ public class StartActivity extends Activity implements OnClickListener {
         	if(key.equals("gameExists")){
         		SP.getString("gameExists", "none");
         		if(gameExists.equals("DEB"))
-        			text_resume.setText("Une partie en cours (Débutant)");
+        			text_resume.setText("Une partie en cours (DÃ©butant)");
         		else if(gameExists.equals("EASY"))
         			text_resume.setText("Une partie en cours (Facile)");
         		else if(gameExists.equals("MEDIUM"))
@@ -112,7 +112,7 @@ public class StartActivity extends Activity implements OnClickListener {
 	
 	private void setTextGameResume(String gameExists){
 		if(gameExists.equals("DEB")){
-			text_resume.setText("Une partie en cours (Débutant)");
+			text_resume.setText("Une partie en cours (DÃ©butant)");
 			b_resume.setEnabled(true);
 		}
 		else if(gameExists.equals("EASY")){
