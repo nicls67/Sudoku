@@ -386,10 +386,10 @@ public class SudokuTable {
 			}
 		}
 		
-		Log.d(TAG, "s_tab size = "+s_tab.length());
+		/*Log.d(TAG, "s_tab size = "+s_tab.length());
 		Log.d(TAG, s_tab);
 		Log.d(TAG, "s_tab_base size = "+s_tab_base.length());
-		Log.d(TAG, s_tab_base);
+		Log.d(TAG, s_tab_base);*/
 		
 		set.add(s_tab);
 		set.add(s_tab_base);
@@ -429,12 +429,12 @@ public class SudokuTable {
 			}
 		}
 		
-		Log.d(TAG, "set size : "+set.size());
+		/*Log.d(TAG, "set size : "+set.size());
 		Log.d(TAG, "s_tab size = "+s_tab.length());
 		Log.d(TAG, s_tab);
 		Log.d(TAG, "s_tab_base size = "+s_tab_base.length());
 		Log.d(TAG, s_tab);
-		Log.d(TAG, "remaining : "+level);
+		Log.d(TAG, "remaining : "+level);*/
 		
 		int pos=0;
 		remaining=0;

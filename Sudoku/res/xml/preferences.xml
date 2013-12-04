@@ -2,6 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
     
     <PreferenceCategory android:title="Affichage"><CheckBoxPreference android:summary="Surligne les blocs dont fait partie la case sélectionnée" android:key="color_block" android:title="Colorer les blocs" /><CheckBoxPreference android:key="color_digits" android:summary="Surligne les cases qui contiennent le chiffre sélectionné" android:title="Surligner chiffres"/><CheckBoxPreference android:key="color_on" android:title="Colorier la grille" android:defaultValue="false"/><CheckBoxPreference android:key="color_base" android:title="Surligner les cases de départ"/><SwitchPreference android:title="Couleur de la grille" android:summaryOff="Noir et blanc" android:key="color_mode" android:summaryOn="Couleur" />
+    <CheckBoxPreference android:title="Surligner les erreurs" android:key="color_errors"/>
     
     
     

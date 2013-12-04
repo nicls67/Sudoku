@@ -31,6 +31,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private BorderedTextView[][] textTab;
 	private int[] difficultyValue;
 	private String difficulty="EASY";
+	private boolean isErrorColored = false;
 	
 	//for border creation
 	private static final int BORDER_TOP = 0x00000001;
@@ -139,158 +140,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		textTab[8][7] = (BorderedTextView) findViewById(R.id.textView98);
 		textTab[8][8] = (BorderedTextView) findViewById(R.id.textView99);
 		
-		for(int i=0;i<9;i++){
-			for(int j=0;j<9;j++){
-				
-				////corners
-				if(i==0 && j==0){ //top left
-					borders = new Border[4];
-					borders[0] = new Border(BORDER_RIGHT);
-					borders[1] = new Border(BORDER_BOTTOM);
-					borders[2] = new Border(BORDER_TOP);
-					borders[2].setWidth(8);
-					borders[3] = new Border(BORDER_LEFT);
-					borders[3].setWidth(8);
-				}else
-				if(j==8 && i==8){ //bottom right
-					borders = new Border[2];
-					borders[0] = new Border(BORDER_RIGHT);
-					borders[1] = new Border(BORDER_BOTTOM);
-					borders[0].setWidth(8);
-					borders[1].setWidth(8);
-				}else
-				if(i==0 && j==8){ //top right
-					borders = new Border[3];
-					borders[0] = new Border(BORDER_RIGHT);
-					borders[1] = new Border(BORDER_BOTTOM);
-					borders[2] = new Border(BORDER_TOP);
-					borders[2].setWidth(8);
-					borders[0].setWidth(8);
-				}else
-				if(i==8 && j==0){ //bottom left
-					borders = new Border[3];
-					borders[0] = new Border(BORDER_RIGHT);
-					borders[1] = new Border(BORDER_BOTTOM);
-					borders[2] = new Border(BORDER_LEFT);
-					borders[2].setWidth(8);
-					borders[1].setWidth(8);
-				}else
-					
-				
-				////start of central columns
-				if(i==0 && j==2){ //top 1st column
-					borders = new Border[3];
-					borders[0] = new Border(BORDER_RIGHT);
-					borders[1] = new Border(BORDER_BOTTOM);
-					borders[2] = new Border(BORDER_TOP);
-					borders[2].setWidth(8);
-					borders[0].setWidth(8);
-				}else
-				if(i==0 && j==5){ //top 2st column
-					borders = new Border[3];
-					borders[0] = new Border(BORDER_RIGHT);
-					borders[1] = new Border(BORDER_BOTTOM);
-					borders[2] = new Border(BORDER_TOP);
-					borders[2].setWidth(8);
-					borders[0].setWidth(8);
-				}else
-				if(i==8 && j==2){ //bottom 1st column
-					borders = new Border[2];
-					borders[0] = new Border(BORDER_RIGHT);
-					borders[1] = new Border(BORDER_BOTTOM);
-					borders[1].setWidth(8);
-					borders[0].setWidth(8);
-				}else
-				if(i==8 && j==5){ //bottom 2st column
-					borders = new Border[2];
-					borders[0] = new Border(BORDER_RIGHT);
-					borders[1] = new Border(BORDER_BOTTOM);
-					borders[1].setWidth(8);
-					borders[0].setWidth(8);
-				}else
-					
-					
-				////start of central lines
-				if(i==2 && j==0){ //left 1st line
-					borders = new Border[3];
-					borders[0] = new Border(BORDER_RIGHT);
-					borders[1] = new Border(BORDER_BOTTOM);
-					borders[2] = new Border(BORDER_LEFT);
-					borders[1].setWidth(8);
-					borders[2].setWidth(8);
-				}else
-				if(i==5 && j==0){ //left 2st line
-					borders = new Border[3];
-					borders[0] = new Border(BORDER_RIGHT);
-					borders[1] = new Border(BORDER_BOTTOM);
-					borders[2] = new Border(BORDER_LEFT);
-					borders[1].setWidth(8);
-					borders[2].setWidth(8);
-				}else
-				if(i==2 && j==8){ //right 1st line
-					borders = new Border[2];
-					borders[0] = new Border(BORDER_RIGHT);
-					borders[1] = new Border(BORDER_BOTTOM);
-					borders[1].setWidth(8);
-					borders[0].setWidth(8);
-				}else
-				if(i==5 && j==8){ //right 2st line
-					borders = new Border[2];
-					borders[0] = new Border(BORDER_RIGHT);
-					borders[1] = new Border(BORDER_BOTTOM);
-					borders[1].setWidth(8);
-					borders[0].setWidth(8);
-				}else
-					
-					
-				//crossing of central lines
-				if((i==2 && j==2) || (i==2 && j==5) || (i==5 && j==2) || (i==5 && j==5)){
-					borders = new Border[2];
-					borders[0] = new Border(BORDER_RIGHT);
-					borders[1] = new Border(BORDER_BOTTOM);
-					borders[1].setWidth(8);
-					borders[0].setWidth(8);
-				}else
-					
-					
-				////lines and columns
-				if(j==0){ //left column
-					borders = new Border[3];
-					borders[0] = new Border(BORDER_RIGHT);
-					borders[1] = new Border(BORDER_BOTTOM);
-					borders[2] = new Border(BORDER_LEFT);
-					borders[2].setWidth(8);
-				}else
-				if(j==8 || j==2 || j==5){ //columns
-					borders = new Border[2];
-					borders[0] = new Border(BORDER_RIGHT);
-					borders[1] = new Border(BORDER_BOTTOM);
-					borders[0].setWidth(8);
-				}else
-				if(i==0){ //top line
-					borders = new Border[3];
-					borders[0] = new Border(BORDER_RIGHT);
-					borders[1] = new Border(BORDER_BOTTOM);
-					borders[2] = new Border(BORDER_TOP);
-					borders[2].setWidth(8);
-				}else
-				if(i==8 || i==2 || i==5){ //bottom line
-					borders = new Border[2];
-					borders[0] = new Border(BORDER_RIGHT);
-					borders[1] = new Border(BORDER_BOTTOM);
-					borders[1].setWidth(8);
-				}
-				
-				
-				else { //normal case
-					borders = new Border[2];
-					borders[0] = new Border(BORDER_RIGHT);
-					borders[1] = new Border(BORDER_BOTTOM);
-				}
-				textTab[i][j].setBorders(borders);
-				borders = null;
-			}
-		}
+		setDefaultBorders();
 		
 		//Log.d(TAG,"All textViews have been retreived");
 		
@@ -502,6 +352,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			Toast.makeText(getApplicationContext(), "Sélectionnez d'abord une case", Toast.LENGTH_SHORT).show();
 			return;
 		}
+		
+		boolean color_errors = SP.getBoolean("color_errors", false);
 			
 		TextView text = textTab[itemSelectedX][itemSelectedY];
 		
@@ -512,8 +364,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    		unselectItem();
 	    		levelEnd();
 	    	}	
-	    	else 
+	    	else{
+	    		if(color_errors){
+	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
+	    			isErrorColored=true;
+	    		}
 	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 1 à cet endroit", Toast.LENGTH_SHORT).show();
+	    	}
 	    	break;
 	    case R.id.button2:
 	    	if(table.setValue(itemSelectedX, itemSelectedY, 2)){
@@ -521,8 +378,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    		unselectItem();
 	    		levelEnd();
 	    	}
-	    	else 
+	    	else{
+	    		if(color_errors){
+	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
+	    			isErrorColored=true;
+	    		}
 	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 2 à cet endroit", Toast.LENGTH_SHORT).show();
+	    	}
 	    	break;
 	    case R.id.button3:
 	    	if(table.setValue(itemSelectedX, itemSelectedY, 3)){
@@ -530,8 +392,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    		unselectItem();
 	    		levelEnd();
 	    	}
-	    	else 
+	    	else{
+	    		if(color_errors){
+	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
+	    			isErrorColored=true;
+	    		}
 	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 3 à cet endroit", Toast.LENGTH_SHORT).show();
+	    	}
 	    	break;
 	    case R.id.button4:
 	    	if(table.setValue(itemSelectedX, itemSelectedY, 4)){
@@ -539,8 +406,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    		unselectItem();
 	    		levelEnd();
 	    	}
-	    	else 
+	    	else{
+	    		if(color_errors){
+	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
+	    			isErrorColored=true;
+	    		}
 	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 4 à cet endroit", Toast.LENGTH_SHORT).show();
+	    	}
 	    	break;
 	    case R.id.button5:
 	    	if(table.setValue(itemSelectedX, itemSelectedY, 5)){
@@ -548,8 +420,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    		unselectItem();
 	    		levelEnd();
 	    	}
-	    	else 
+	    	else{
+	    		if(color_errors){
+	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
+	    			isErrorColored=true;
+	    		}
 	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 5 à cet endroit", Toast.LENGTH_SHORT).show();
+	    	}
 	    	break;
 	    case R.id.button6:
 	    	if(table.setValue(itemSelectedX, itemSelectedY, 6)){
@@ -557,8 +434,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    		unselectItem();
 	    		levelEnd();
 	    	}
-	    	else 
+	    	else{
+	    		if(color_errors){
+	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
+	    			isErrorColored=true;
+	    		}
 	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 6 à cet endroit", Toast.LENGTH_SHORT).show();
+	    	}
 	    	break;
 	    case R.id.button7:
 	    	if(table.setValue(itemSelectedX, itemSelectedY, 7)){
@@ -566,8 +448,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    		unselectItem();
 	    		levelEnd();
 	    	}
-	    	else 
+	    	else{
+	    		if(color_errors){
+	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
+	    			isErrorColored=true;
+	    		}
 	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 7 à cet endroit", Toast.LENGTH_SHORT).show();
+	    	}
 	    	break;
 	    case R.id.button8:
 	    	if(table.setValue(itemSelectedX, itemSelectedY, 8)){
@@ -575,8 +462,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    		unselectItem();
 	    		levelEnd();
 	    	}
-	    	else 
+	    	else{
+	    		if(color_errors){
+	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
+	    			isErrorColored=true;
+	    		}
 	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 8 à cet endroit", Toast.LENGTH_SHORT).show();
+	    	}
 	    	break;
 	    case R.id.button9:
 	    	if(table.setValue(itemSelectedX, itemSelectedY, 9)){
@@ -584,8 +476,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    		unselectItem();
 	    		levelEnd();
 	    	}
-	    	else 
+	    	else{
+	    		if(color_errors){
+	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
+	    			isErrorColored=true;
+	    		}
 	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 9 à cet endroit", Toast.LENGTH_SHORT).show();
+	    	}
 	    	break;
 	    case R.id.buttonR:
 	    	unselectItem();
@@ -727,6 +624,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			}
 		}
 		
+		if(isErrorColored)
+			setDefaultBorders();
+		
 		
 	}
 
@@ -822,6 +722,179 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
     
     
+    private void setDefaultBorders(){
+    	for(int i=0;i<9;i++){
+			for(int j=0;j<9;j++){
+				
+				////corners
+				if(i==0 && j==0){ //top left
+					borders = new Border[4];
+					borders[0] = new Border(BORDER_RIGHT);
+					borders[1] = new Border(BORDER_BOTTOM);
+					borders[2] = new Border(BORDER_TOP);
+					borders[2].setWidth(8);
+					borders[3] = new Border(BORDER_LEFT);
+					borders[3].setWidth(8);
+				}else
+				if(j==8 && i==8){ //bottom right
+					borders = new Border[2];
+					borders[0] = new Border(BORDER_RIGHT);
+					borders[1] = new Border(BORDER_BOTTOM);
+					borders[0].setWidth(8);
+					borders[1].setWidth(8);
+				}else
+				if(i==0 && j==8){ //top right
+					borders = new Border[3];
+					borders[0] = new Border(BORDER_RIGHT);
+					borders[1] = new Border(BORDER_BOTTOM);
+					borders[2] = new Border(BORDER_TOP);
+					borders[2].setWidth(8);
+					borders[0].setWidth(8);
+				}else
+				if(i==8 && j==0){ //bottom left
+					borders = new Border[3];
+					borders[0] = new Border(BORDER_RIGHT);
+					borders[1] = new Border(BORDER_BOTTOM);
+					borders[2] = new Border(BORDER_LEFT);
+					borders[2].setWidth(8);
+					borders[1].setWidth(8);
+				}else
+					
+				
+				////start of central columns
+				if(i==0 && j==2){ //top 1st column
+					borders = new Border[3];
+					borders[0] = new Border(BORDER_RIGHT);
+					borders[1] = new Border(BORDER_BOTTOM);
+					borders[2] = new Border(BORDER_TOP);
+					borders[2].setWidth(8);
+					borders[0].setWidth(8);
+				}else
+				if(i==0 && j==5){ //top 2st column
+					borders = new Border[3];
+					borders[0] = new Border(BORDER_RIGHT);
+					borders[1] = new Border(BORDER_BOTTOM);
+					borders[2] = new Border(BORDER_TOP);
+					borders[2].setWidth(8);
+					borders[0].setWidth(8);
+				}else
+				if(i==8 && j==2){ //bottom 1st column
+					borders = new Border[2];
+					borders[0] = new Border(BORDER_RIGHT);
+					borders[1] = new Border(BORDER_BOTTOM);
+					borders[1].setWidth(8);
+					borders[0].setWidth(8);
+				}else
+				if(i==8 && j==5){ //bottom 2st column
+					borders = new Border[2];
+					borders[0] = new Border(BORDER_RIGHT);
+					borders[1] = new Border(BORDER_BOTTOM);
+					borders[1].setWidth(8);
+					borders[0].setWidth(8);
+				}else
+					
+					
+				////start of central lines
+				if(i==2 && j==0){ //left 1st line
+					borders = new Border[3];
+					borders[0] = new Border(BORDER_RIGHT);
+					borders[1] = new Border(BORDER_BOTTOM);
+					borders[2] = new Border(BORDER_LEFT);
+					borders[1].setWidth(8);
+					borders[2].setWidth(8);
+				}else
+				if(i==5 && j==0){ //left 2st line
+					borders = new Border[3];
+					borders[0] = new Border(BORDER_RIGHT);
+					borders[1] = new Border(BORDER_BOTTOM);
+					borders[2] = new Border(BORDER_LEFT);
+					borders[1].setWidth(8);
+					borders[2].setWidth(8);
+				}else
+				if(i==2 && j==8){ //right 1st line
+					borders = new Border[2];
+					borders[0] = new Border(BORDER_RIGHT);
+					borders[1] = new Border(BORDER_BOTTOM);
+					borders[1].setWidth(8);
+					borders[0].setWidth(8);
+				}else
+				if(i==5 && j==8){ //right 2st line
+					borders = new Border[2];
+					borders[0] = new Border(BORDER_RIGHT);
+					borders[1] = new Border(BORDER_BOTTOM);
+					borders[1].setWidth(8);
+					borders[0].setWidth(8);
+				}else
+					
+					
+				//crossing of central lines
+				if((i==2 && j==2) || (i==2 && j==5) || (i==5 && j==2) || (i==5 && j==5)){
+					borders = new Border[2];
+					borders[0] = new Border(BORDER_RIGHT);
+					borders[1] = new Border(BORDER_BOTTOM);
+					borders[1].setWidth(8);
+					borders[0].setWidth(8);
+				}else
+					
+					
+				////lines and columns
+				if(j==0){ //left column
+					borders = new Border[3];
+					borders[0] = new Border(BORDER_RIGHT);
+					borders[1] = new Border(BORDER_BOTTOM);
+					borders[2] = new Border(BORDER_LEFT);
+					borders[2].setWidth(8);
+				}else
+				if(j==8 || j==2 || j==5){ //columns
+					borders = new Border[2];
+					borders[0] = new Border(BORDER_RIGHT);
+					borders[1] = new Border(BORDER_BOTTOM);
+					borders[0].setWidth(8);
+				}else
+				if(i==0){ //top line
+					borders = new Border[3];
+					borders[0] = new Border(BORDER_RIGHT);
+					borders[1] = new Border(BORDER_BOTTOM);
+					borders[2] = new Border(BORDER_TOP);
+					borders[2].setWidth(8);
+				}else
+				if(i==8 || i==2 || i==5){ //bottom line
+					borders = new Border[2];
+					borders[0] = new Border(BORDER_RIGHT);
+					borders[1] = new Border(BORDER_BOTTOM);
+					borders[1].setWidth(8);
+				}
+				
+				
+				else { //normal case
+					borders = new Border[2];
+					borders[0] = new Border(BORDER_RIGHT);
+					borders[1] = new Border(BORDER_BOTTOM);
+				}
+				textTab[i][j].setBorders(borders);
+				borders = null;
+			}
+		}
+    }
     
+    private void colorBorders(int x, int y, int color){
+    	borders = new Border[4];
+    	borders[0] = new Border(BORDER_RIGHT);
+		borders[1] = new Border(BORDER_BOTTOM);
+		borders[2] = new Border(BORDER_TOP);
+		borders[3] = new Border(BORDER_LEFT);
+		borders[0].setWidth(12);
+		borders[1].setWidth(12);
+		borders[2].setWidth(8);
+		borders[3].setWidth(8);
+		borders[0].setColor(color);
+		borders[1].setColor(color);
+		borders[2].setColor(color);
+		borders[3].setColor(color);
+		
+		textTab[x][y].setBorders(borders);
+		textTab[x][y].invalidate();
+		borders = null;
+    }
     
 } //class MainActivity
