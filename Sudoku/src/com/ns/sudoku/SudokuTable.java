@@ -79,38 +79,32 @@ public class SudokuTable {
 	 * Generate a Sudoku table
 	 */
 	private boolean rand_generate(){
-		for(int i=0;i<9;i++){
-			
-			int lower = 1;
-			int higher = 9;
-			int random=0;
-			int count = 0;
-			
-			for(int j=0;j<9;j++){
-				if(tab[i][j]==0){
-					//Log.d(TAG, "generating random for "+String.valueOf(i)+","+String.valueOf(j));
-					
-					//find a number between 1 and 9
-					while(!checkPosition(i, j, random,true)){
-						
-						random = (int)(Math.random()*(higher+1-lower))+lower;
-						count++;
-						
-						if(count>80)
-							return false;
+		int[] list = new int[9];
+		int size;
+
+		for (int i=0;i<9;i++){
+			for (int j=0;j<9;j++){
+				if (tab[i][j]==0)
+				{
+					size=0;
+
+					for (int k=1;k<10;k++){
+						if (checkPosition(i,j,k,true)){
+							list[size]=k;
+							size++;
+						}
 					}
-					
-					tab[i][j]=random;
-					count=0;
-					if(random==higher)
-						higher--;
-					else if(random==lower)
-						lower++;
-				
+
+					if (size==0) return false;
+
+					int val = (int)(Math.random()*size);
+					tab[i][j] = list[val];
 				}
+
 			}
 		}
-		
+
+
 		return true;
 	}
 	
