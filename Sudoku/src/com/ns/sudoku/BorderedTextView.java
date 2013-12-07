@@ -10,10 +10,10 @@ import android.widget.TextView;
 public class BorderedTextView extends TextView {
 	
 	private Paint paint = new Paint();
-    public static final int BORDER_TOP = 0x00000001;
-    public static final int BORDER_RIGHT = 0x00000002;
-    public static final int BORDER_BOTTOM = 0x00000004;
-    public static final int BORDER_LEFT = 0x00000008;
+    private static final int BORDER_TOP = 0x00000001;
+    private static final int BORDER_RIGHT = 0x00000002;
+    private static final int BORDER_BOTTOM = 0x00000004;
+    private static final int BORDER_LEFT = 0x00000008;
 
     private Border[] borders;
 

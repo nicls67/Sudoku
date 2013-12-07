@@ -9,9 +9,9 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.Iterator;
+
 
 /**
  * Class representing a Sudoku table
@@ -26,6 +26,7 @@ public class SudokuTable {
 	private int level =3;
 	private int remaining=level;
 	private SharedPreferences SP=null;
+	private int[][] wBox = new int[3][2];
 	
 	/**
 	 * Constructor
@@ -55,17 +56,13 @@ public class SudokuTable {
 					tab[i][j]=0;
 				}
 			}
-		}while(rand_generate()==false);
+		}while(!rand_generate());
 		
 		delete();
 		
 		Log.d(TAG,"Generation completed");
 		
-		for(int i=0;i<9;i++){
-			for(int j=0;j<9;j++){
-				tab_base[i][j]=tab[i][j];
-			}
-		}
+		for(int i=0;i<9;i++) System.arraycopy(tab[i], 0, tab_base[i], 0, 9);
 	}
 	
 	/**
@@ -94,7 +91,7 @@ public class SudokuTable {
 					//Log.d(TAG, "generating random for "+String.valueOf(i)+","+String.valueOf(j));
 					
 					//find a number between 1 and 9
-					while(checkPosition(i,j,random)==false){
+					while(!checkPosition(i, j, random,true)){
 						
 						random = (int)(Math.random()*(higher+1-lower))+lower;
 						count++;
@@ -124,22 +121,41 @@ public class SudokuTable {
 	 * @param val value to check
 	 * @return true if it is possible to put the value at this position, false otherwise
 	 */
-	private boolean checkPosition(int x, int y, int val){
-		//Log.d(TAG, "Testing value "+String.valueOf(val)+" at position "+String.valueOf(x)+","+String.valueOf(y));
-		
+	private boolean checkPosition(int x, int y, int val, boolean isBuild){
+		//if (!isBuild)	Log.d(TAG, "Testing value "+String.valueOf(val)+" at position "+String.valueOf(x)+","+String.valueOf(y));
+
+		boolean res = true;
+
+		for(int i=0;i<3;i++){
+			wBox[i][0]=10;
+			wBox[i][1]=10;
+		}
+
 		if(val==0)
 			return false;
 		
-		//check line
-		for(int i=0;i<9;i++){
-			if(tab[i][y]==val)
-				return false;
-		}
-		
 		//check column
 		for(int i=0;i<9;i++){
-			if(tab[x][i]==val)
-				return false;
+			if(tab[i][y]==val){
+				if(isBuild) return false;
+				else{
+					wBox[0][0]=i;
+					wBox[0][1]=y;
+					res=false;
+				}
+			}
+		}
+		
+		//check row
+		for(int i=0;i<9;i++){
+			if(tab[x][i]==val){
+				if(isBuild)return false;
+				else{
+					wBox[1][0]=x;
+					wBox[1][1]=i;
+					res=false;
+				}
+			}
 		}
 		
 		//check square, first find square bounds, then parse the square for checking
@@ -224,28 +240,42 @@ public class SudokuTable {
 		
 		for(int i=x_low;i<=x_high;i++){
 			for(int j=y_low;j<=y_high;j++){
-				if(tab[i][j]==val)
-					return false;
+				if(tab[i][j]==val){
+					if(isBuild)return false;
+					else{
+						wBox[2][0]=i;
+						wBox[2][1]=j;
+						res=false;
+					}
+				}
 			}
 		}
-		
-		
-		return true;
+
+		/*if (!isBuild){
+			//Log.d(TAG,"size = "+wrongBoxList.size());
+			for(int i = 0; i<3; i++){
+				Log.d(TAG, String.valueOf(wBox[i][0]));
+				Log.d(TAG, String.valueOf(wBox[i][1]));
+			}
+		}*/
+
+		if(isBuild) return true;
+		else return res;
 	}
 	
 	/**
 	 * Check if the given value can be put at the given position, if yes, set the value
-	 * @brief Set a value in the table
 	 * @param x horizontal coordinate
 	 * @param y vertical coordinate
 	 * @param val value to be set
-	 * @return true if the value has beed set, false otherwise
+	 * @return true if the value has been set, false otherwise
 	 */
 	public boolean setValue(int x, int y, int val){
-		if(checkPosition(x,y,val)==false)
+		if(!checkPosition(x, y, val,false))
 			return false;
 		
 		tab[x][y]=val;
+
 		if(remaining!=0)
 			remaining--;
 		
@@ -299,10 +329,7 @@ public class SudokuTable {
 	 * @return true if there is no more free boxes remaining, false otherwise
 	 */
 	public boolean isEnd(){
-		if(remaining==0)
-			return true;
-		else
-			return false;
+		return remaining == 0;
 	}
 
 	/**
@@ -328,10 +355,7 @@ public class SudokuTable {
 	 * @return true if the box is a base box, false otherwise
 	 */
 	public boolean isBase(int x, int y){
-		if(tab_base[x][y]==0)
-			return false;
-		else
-			return true;
+		return tab_base[x][y] != 0;
 	}
 	
 	/**
@@ -341,20 +365,12 @@ public class SudokuTable {
 		Log.i(TAG, "Completing table automatically");
 		//backing up current table
 		int backup[][] = new int[9][9];
-		for(int i=0;i<9;i++){
-			for(int j=0;j<9;j++){
-				backup[i][j]=tab[i][j];
-			}
-		}
+		for(int i=0;i<9;i++) System.arraycopy(tab[i], 0, backup[i], 0, 9);
 		
 		//generate table
-		while(rand_generate()==false){
+		while(!rand_generate()){
 			//restore old table if generating has failed
-			for(int i=0;i<9;i++){
-				for(int j=0;j<9;j++){
-					tab[i][j]=backup[i][j];
-				}
-			}
+			for(int i=0;i<9;i++) System.arraycopy(backup[i], 0, tab[i], 0, 9);
 		}
 		
 		//clone to tab_base
@@ -457,6 +473,15 @@ public class SudokuTable {
 	 */
 	public int getLevel(){
 		return level;
+	}
+
+
+	/**
+	 * Returns the list of all boxes containing the given wrong number
+	 * @return the list
+	 */
+	public int[][] getWrongBoxList(){
+		return wBox;
 	}
 	
 }//class SudokuTable

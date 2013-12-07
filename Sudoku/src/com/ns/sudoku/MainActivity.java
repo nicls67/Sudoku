@@ -19,6 +19,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+
 public class MainActivity extends Activity implements View.OnClickListener {
 	
 	private static final String TAG = "SudokuDebug_MainActivity";
@@ -26,12 +28,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private SharedPreferences SP;
 	private SudokuTable table=null;
 	private int itemSelectedX = 9, itemSelectedY = 9; // 0 to 8, 9 means nothing is selected
-	private Button b1=null, b2=null, b3=null, b4=null, b5=null, b6=null, b7=null, b8=null, b9=null, br=null, bd=null;
 	private TextView text_remaining=null;
 	private BorderedTextView[][] textTab;
 	private int[] difficultyValue;
 	private String difficulty="EASY";
-	private boolean isErrorColored = false;
+	private int[][] wBoxList;
 	
 	//for border creation
 	private static final int BORDER_TOP = 0x00000001;
@@ -145,17 +146,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		//Log.d(TAG,"All textViews have been retreived");
 		
 		//assign buttons
-		b1 = (Button) findViewById(R.id.button1);
-		b2 = (Button) findViewById(R.id.button2);
-		b3 = (Button) findViewById(R.id.button3);
-		b4 = (Button) findViewById(R.id.button4);
-		b5 = (Button) findViewById(R.id.button5);
-		b6 = (Button) findViewById(R.id.button6);
-		b7 = (Button) findViewById(R.id.button7);
-		b8 = (Button) findViewById(R.id.button8);
-		b9 = (Button) findViewById(R.id.button9);
-		br = (Button) findViewById(R.id.buttonR);
-		bd = (Button) findViewById(R.id.buttonD);
+		Button b1 = (Button) findViewById(R.id.button1);
+		Button b2 = (Button) findViewById(R.id.button2);
+		Button b3 = (Button) findViewById(R.id.button3);
+		Button b4 = (Button) findViewById(R.id.button4);
+		Button b5 = (Button) findViewById(R.id.button5);
+		Button b6 = (Button) findViewById(R.id.button6);
+		Button b7 = (Button) findViewById(R.id.button7);
+		Button b8 = (Button) findViewById(R.id.button8);
+		Button b9 = (Button) findViewById(R.id.button9);
+		Button br = (Button) findViewById(R.id.buttonR);
+		Button bd = (Button) findViewById(R.id.buttonD);
 		
 		//assign listeners
 		b1.setOnClickListener(this);
@@ -366,8 +367,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    	}	
 	    	else{
 	    		if(color_errors){
-	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
-	    			isErrorColored=true;
+				    wBoxList=table.getWrongBoxList();
+				    for(int i=0;i<3;i++){
+					    if (wBoxList[i][0]!=10)
+					        colorBorders(wBoxList[i][0],wBoxList[i][1], Color.RED);
+				    }
 	    		}
 	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 1 à cet endroit", Toast.LENGTH_SHORT).show();
 	    	}
@@ -380,8 +384,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    	}
 	    	else{
 	    		if(color_errors){
-	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
-	    			isErrorColored=true;
+				    wBoxList=table.getWrongBoxList();
+				    for(int i=0;i<3;i++){
+					    if (wBoxList[i][0]!=10)
+						    colorBorders(wBoxList[i][0],wBoxList[i][1], Color.RED);
+				    }
 	    		}
 	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 2 à cet endroit", Toast.LENGTH_SHORT).show();
 	    	}
@@ -394,8 +401,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    	}
 	    	else{
 	    		if(color_errors){
-	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
-	    			isErrorColored=true;
+				    wBoxList=table.getWrongBoxList();
+				    for(int i=0;i<3;i++){
+					    if (wBoxList[i][0]!=10)
+						    colorBorders(wBoxList[i][0],wBoxList[i][1], Color.RED);
+				    }
 	    		}
 	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 3 à cet endroit", Toast.LENGTH_SHORT).show();
 	    	}
@@ -408,8 +418,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    	}
 	    	else{
 	    		if(color_errors){
-	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
-	    			isErrorColored=true;
+				    wBoxList=table.getWrongBoxList();
+				    for(int i=0;i<3;i++){
+					    if (wBoxList[i][0]!=10)
+						    colorBorders(wBoxList[i][0],wBoxList[i][1], Color.RED);
+				    }
 	    		}
 	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 4 à cet endroit", Toast.LENGTH_SHORT).show();
 	    	}
@@ -422,8 +435,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    	}
 	    	else{
 	    		if(color_errors){
-	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
-	    			isErrorColored=true;
+				    wBoxList=table.getWrongBoxList();
+				    for(int i=0;i<3;i++){
+					    if (wBoxList[i][0]!=10)
+						    colorBorders(wBoxList[i][0],wBoxList[i][1], Color.RED);
+				    }
 	    		}
 	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 5 à cet endroit", Toast.LENGTH_SHORT).show();
 	    	}
@@ -436,8 +452,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    	}
 	    	else{
 	    		if(color_errors){
-	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
-	    			isErrorColored=true;
+				    wBoxList=table.getWrongBoxList();
+				    for(int i=0;i<3;i++){
+					    if (wBoxList[i][0]!=10)
+						    colorBorders(wBoxList[i][0],wBoxList[i][1], Color.RED);
+				    }
 	    		}
 	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 6 à cet endroit", Toast.LENGTH_SHORT).show();
 	    	}
@@ -450,8 +469,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    	}
 	    	else{
 	    		if(color_errors){
-	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
-	    			isErrorColored=true;
+				    wBoxList=table.getWrongBoxList();
+				    for(int i=0;i<3;i++){
+					    if (wBoxList[i][0]!=10)
+						    colorBorders(wBoxList[i][0],wBoxList[i][1], Color.RED);
+				    }
 	    		}
 	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 7 à cet endroit", Toast.LENGTH_SHORT).show();
 	    	}
@@ -464,8 +486,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    	}
 	    	else{
 	    		if(color_errors){
-	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
-	    			isErrorColored=true;
+				    wBoxList=table.getWrongBoxList();
+				    for(int i=0;i<3;i++){
+					    if (wBoxList[i][0]!=10)
+						    colorBorders(wBoxList[i][0],wBoxList[i][1], Color.RED);
+				    }
 	    		}
 	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 8 à cet endroit", Toast.LENGTH_SHORT).show();
 	    	}
@@ -478,8 +503,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    	}
 	    	else{
 	    		if(color_errors){
-	    			colorBorders(itemSelectedX,itemSelectedY,Color.RED);
-	    			isErrorColored=true;
+				    wBoxList=table.getWrongBoxList();
+				    for(int i=0;i<3;i++){
+					    if (wBoxList[i][0]!=10)
+						    colorBorders(wBoxList[i][0],wBoxList[i][1], Color.RED);
+				    }
 	    		}
 	    		Toast.makeText(getApplicationContext(), "Impossible de placer la valeur 9 à cet endroit", Toast.LENGTH_SHORT).show();
 	    	}
@@ -513,12 +541,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	 * Check if the game is finished. if yes, display a dialog and start a new game or close activity
 	 */
 	private void levelEnd(){
-		if(table.isEnd()==false)
+		if(!table.isEnd())
 			return;
-		
+
 		Log.d(TAG, "Game finished");
 		AlertDialog.Builder dialogEnd = new AlertDialog.Builder(this);
-		dialogEnd.setTitle("Partie termin�e !");
+		dialogEnd.setTitle("Partie terminée !");
 		dialogEnd.setMessage("Voulez-vous commencer une nouvelle partie ?");
 		dialogEnd.setCancelable(false);
 		dialogEnd.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
@@ -574,7 +602,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		if(color_on){
 			boolean isColored = SP.getBoolean("color_mode", false);
 			
-			if(isColored==false){
+			if(!isColored){
 				int c;
 				for(int i=0;i<9;i++){
 					for(int j=0;j<9;j++){
@@ -624,8 +652,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			}
 		}
 		
-		if(isErrorColored)
+		if(wBoxList!=null){
 			setDefaultBorders();
+			wBoxList = null;
+		}
+
 		
 		
 	}
@@ -896,5 +927,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		textTab[x][y].invalidate();
 		borders = null;
     }
-    
+
+
 } //class MainActivity

@@ -13,21 +13,21 @@ import android.widget.TextView;
 public class StartActivity extends Activity implements OnClickListener {
 
 	private static final int CODE_MAIN_ACTIVITY = 1;
-	private Button b_deb=null, b_easy=null, b_med=null, b_hard=null, b_pref=null, b_resume=null;
+	private Button b_resume=null;
 	private TextView text_resume=null;
 	private SharedPreferences SP=null;
-	String gameExists="none";
+	private String gameExists="none";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start);
-		
-		b_deb = (Button)findViewById(R.id.buttonDeb);
-		b_easy = (Button)findViewById(R.id.buttonEasy); 
-		b_med = (Button)findViewById(R.id.buttonMed);
-		b_hard = (Button)findViewById(R.id.buttonHard);
-		b_pref = (Button)findViewById(R.id.buttonPref);
+
+		Button b_deb = (Button) findViewById(R.id.buttonDeb);
+		Button b_easy = (Button) findViewById(R.id.buttonEasy);
+		Button b_med = (Button) findViewById(R.id.buttonMed);
+		Button b_hard = (Button) findViewById(R.id.buttonHard);
+		Button b_pref = (Button) findViewById(R.id.buttonPref);
 		b_resume = (Button)findViewById(R.id.buttonResume);
 		text_resume = (TextView)findViewById(R.id.textViewResumeGame);
 		
@@ -110,20 +110,20 @@ public class StartActivity extends Activity implements OnClickListener {
     };*/
 	
 	
-	private void setTextGameResume(String gameExists){
-		if(gameExists.equals("DEB")){
+	private void setTextGameResume(String str){
+		if(str.equals("DEB")){
 			text_resume.setText("Une partie en cours (Débutant)");
 			b_resume.setEnabled(true);
 		}
-		else if(gameExists.equals("EASY")){
+		else if(str.equals("EASY")){
 			text_resume.setText("Une partie en cours (Facile)");
 			b_resume.setEnabled(true);
 		}
-		else if(gameExists.equals("MEDIUM")){
+		else if(str.equals("MEDIUM")){
 			text_resume.setText("Une partie en cours (Moyen)");
 			b_resume.setEnabled(true);
 		}
-		else if(gameExists.equals("HARD")){
+		else if(str.equals("HARD")){
 			text_resume.setText("Une partie en cours (Difficile)");
 			b_resume.setEnabled(true);
 		}

@@ -3,6 +3,7 @@ package com.ns.sudoku;
 import android.graphics.Color;
 
 public class Border {
+
 	private int orientation;
     private int width = 4;
     private int color = Color.BLACK;
