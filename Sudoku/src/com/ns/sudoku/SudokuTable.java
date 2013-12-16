@@ -9,8 +9,8 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Iterator;
+import java.util.Set;
 
 
 /**
@@ -21,25 +21,37 @@ public class SudokuTable {
 	
 	private static final String TAG = "SudokuDebug_SudokuTable";
 
-	private int tab[][];
-	private int tab_base[][];
+	private int tab[][] = new int[9][9];
+	private int tab_base[][] = new int[9][9];
 	private int level =3;
 	private int remaining=level;
 	private SharedPreferences SP=null;
 	private int[][] wBox = new int[3][2];
+	private HelpList helpList;
+	private boolean displayImpossibleValues;
+
 	
 	/**
 	 * Constructor
 	 */
 	public SudokuTable() {
-		tab = new int[9][9];
-		tab_base = new int[9][9];
+	}
+
+	public SudokuTable(HelpList hl) {
+		this.helpList=hl;
 	}
 	
 	public SudokuTable(Context context) {
-		tab = new int[9][9];
-		tab_base = new int[9][9];
 		SP = PreferenceManager.getDefaultSharedPreferences(context);
+		SP.registerOnSharedPreferenceChangeListener(preferenceListener);
+		displayImpossibleValues = SP.getBoolean("display_impossible_values",false);
+	}
+
+	public SudokuTable(Context context, HelpList hl) {
+		SP = PreferenceManager.getDefaultSharedPreferences(context);
+		SP.registerOnSharedPreferenceChangeListener(preferenceListener);
+		displayImpossibleValues = SP.getBoolean("display_impossible_values",false);
+		this.helpList=hl;
 	}
 	
 	/**
@@ -49,6 +61,7 @@ public class SudokuTable {
 		remaining = level;
 		
 		Log.d(TAG,"Starting generation");
+
 		do{
 			//put all values to 0
 			for(int i=0;i<9;i++){
@@ -59,10 +72,19 @@ public class SudokuTable {
 		}while(!rand_generate());
 		
 		delete();
-		
+
 		Log.d(TAG,"Generation completed");
 		
-		for(int i=0;i<9;i++) System.arraycopy(tab[i], 0, tab_base[i], 0, 9);
+		for(int i=0;i<9;i++) {
+			for(int j=0;j<9;j++){
+				tab_base[i][j]=tab[i][j];
+				if (tab[i][j]!=0) helpList.setBoxImpossible(i, j);
+				else{
+					if (displayImpossibleValues)
+						setHelpListBox(i,j);
+				}
+			}
+		}
 	}
 	
 	/**
@@ -272,6 +294,26 @@ public class SudokuTable {
 
 		if(remaining!=0)
 			remaining--;
+
+		//delete the set number in each helpbox of row, column and square
+		for (int i = 0; i<9; i++){
+			helpList.setPossible(i,y,val-1,!displayImpossibleValues);
+			helpList.setPossible(x,i,val-1,!displayImpossibleValues);
+		}
+		int a,b;
+		if(x<3)a=0;
+		else if(x>5)a=6;
+		else a=3;
+		if(y<3)b=0;
+		else if(y>5)b=6;
+		else b=3;
+		for(int i=a;i<a+3;i++){
+			for(int j=b;j<b+3;j++){
+				helpList.setPossible(i,j,val-1,!displayImpossibleValues);
+			}
+		}
+
+		helpList.setBoxImpossible(x,y);
 		
 		return true;
 	}
@@ -314,8 +356,31 @@ public class SudokuTable {
 	 * @param y vertical coordinate
 	 */
 	public void delete_value(int x,int y){
+		int val = tab[x][y];
 		tab[x][y]=0;
 		remaining++;
+
+		if (displayImpossibleValues){
+			for (int i = 0; i<9; i++){
+				helpList.setPossible(i,y,val-1,true);
+				helpList.setPossible(x,i,val-1,true);
+			}
+			int a,b;
+			if(x<3)a=0;
+			else if(x>5)a=6;
+			else a=3;
+			if(y<3)b=0;
+			else if(y>5)b=6;
+			else b=3;
+			for(int i=a;i<a+3;i++){
+				for(int j=b;j<b+3;j++){
+					helpList.setPossible(i,j,val-1,true);
+				}
+			}
+		}
+
+		else
+			setHelpListBox(x,y);
 	}
 
 	/**
@@ -477,6 +542,39 @@ public class SudokuTable {
 	public int[][] getWrongBoxList(){
 		return wBox;
 	}
-	
+
+
+	public SharedPreferences.OnSharedPreferenceChangeListener preferenceListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+
+		@Override
+		public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+			Log.d(TAG,"Preference changed");
+			if (key.equals("display_impossible_values")){
+				displayImpossibleValues = SP.getBoolean("display_impossible_values", false);
+				for(int i=0;i<9;i++) {
+					for(int j=0;j<9;j++){
+						if (tab_base[i][j]==0)
+							setHelpListBox(i,j);
+					}
+				}
+			}
+		}
+	};
+
+	private void setHelpListBox(int i, int j){
+		if (displayImpossibleValues){
+			for (int k=1;k<10;k++){
+				if (!checkPosition(i, j, k, true)) helpList.setPossible(i, j, k - 1, false);
+				else helpList.setPossible(i, j, k - 1, true);
+			}
+		}
+		else{
+			for (int k=0;k<9;k++){
+				if (helpList.getState(i,j,k)==2)
+					helpList.setPossible(i,j,k,true);
+			}
+		}
+	}
+
 }//class SudokuTable
 

@@ -30,9 +30,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private int itemSelectedX = 9, itemSelectedY = 9; // 0 to 8, 9 means nothing is selected
 	private TextView text_remaining=null;
 	private BorderedTextView[][] textTab;
+	private BorderedTextView[] textHelp;
 	private int[] difficultyValue;
 	private String difficulty="EASY";
 	private int[][] wBoxList;
+	private HelpList helpList = new HelpList();
 	
 	//for border creation
 	private static final int BORDER_TOP = 0x00000001;
@@ -144,7 +146,40 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		setDefaultBorders();
 		
 		//Log.d(TAG,"All textViews have been retreived");
-		
+
+		//textHelp
+		textHelp = new BorderedTextView[9];
+		textHelp[0] = (BorderedTextView) findViewById(R.id.textHelp1);
+		textHelp[1] = (BorderedTextView) findViewById(R.id.textHelp2);
+		textHelp[2] = (BorderedTextView) findViewById(R.id.textHelp3);
+		textHelp[3] = (BorderedTextView) findViewById(R.id.textHelp4);
+		textHelp[4] = (BorderedTextView) findViewById(R.id.textHelp5);
+		textHelp[5] = (BorderedTextView) findViewById(R.id.textHelp6);
+		textHelp[6] = (BorderedTextView) findViewById(R.id.textHelp7);
+		textHelp[7] = (BorderedTextView) findViewById(R.id.textHelp8);
+		textHelp[8] = (BorderedTextView) findViewById(R.id.textHelp9);
+
+		borders = new Border[4];
+		borders[0] = new Border(BORDER_TOP);
+		borders[1] = new Border(BORDER_LEFT);
+		borders[2] = new Border(BORDER_RIGHT);
+		borders[3] = new Border(BORDER_BOTTOM);
+		borders[0].setWidth(8);
+		borders[1].setWidth(8);
+		borders[2].setWidth(8);
+		borders[3].setWidth(8);
+		textHelp[0].setBorders(borders);
+		borders = new Border[3];
+		borders[0] = new Border(BORDER_TOP);
+		borders[1] = new Border(BORDER_BOTTOM);
+		borders[2] = new Border(BORDER_RIGHT);
+		borders[0].setWidth(8);
+		borders[1].setWidth(8);
+		borders[2].setWidth(8);
+		for(int i=1;i<9;i++) textHelp[i].setBorders(borders);
+		for (BorderedTextView i : textHelp) i.setBackgroundColor(Color.DKGRAY);
+
+
 		//assign buttons
 		Button b1 = (Button) findViewById(R.id.button1);
 		Button b2 = (Button) findViewById(R.id.button2);
@@ -171,10 +206,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		br.setOnClickListener(this);
 		bd.setOnClickListener(this);
 		for(int i=0;i<9;i++){
-			for(int j=0;j<9;j++){
-				textTab[i][j].setOnClickListener(this);
-			}
+			for(int j=0;j<9;j++) textTab[i][j].setOnClickListener(this);
 		}
+		for (int i=0;i<9;i++) textHelp[i].setOnClickListener(this);
 		
 		//get resources
 		Resources res = getResources();
@@ -187,7 +221,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		SP.registerOnSharedPreferenceChangeListener(preferenceListener);
 		
 		//creating table
-		table = new SudokuTable(getBaseContext());
+		table = new SudokuTable(getBaseContext(),helpList);
 		
 		text_remaining = (TextView) findViewById(R.id.boxes_remaining);
 		
@@ -332,7 +366,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	@Override
 	public void onClick(View v) {
 		
-		//check if the item clicked is a box
+		//check if the clicked item is a box
 		for(int i=0;i<9;i++){
 			for(int j=0;j<9;j++){
 				if(textTab[i][j]==v){
@@ -343,9 +377,45 @@ public class MainActivity extends Activity implements View.OnClickListener {
 					ColorizeBlocks(i,j);
 						
 					textTab[i][j].setBackgroundColor(Color.YELLOW);
+
+					int[] help = helpList.getState(i,j);
+					for (int k=0;k<9;k++){
+						switch (help[k]){
+							case 0:
+								textHelp[k].setBackgroundColor(Color.WHITE);
+								break;
+							case 1:
+								textHelp[k].setBackgroundColor(Color.GREEN);
+								break;
+							default:
+								textHelp[k].setBackgroundColor(Color.DKGRAY);
+								break;
+						}
+					}
 					
 					return;
 				}
+			}
+		}
+
+		//check if the click is on a help
+		for(int i=0;i<9;i++){
+			if (textHelp[i]==v){
+				if (itemSelectedX==9 || itemSelectedY==9) return;
+				int val = helpList.getState(itemSelectedX,itemSelectedY,i);
+				switch(val){
+					case 0:
+						textHelp[i].setBackgroundColor(Color.GREEN);
+						helpList.setDisplay(itemSelectedX,itemSelectedY,i,true);
+						break;
+					case 1:
+						textHelp[i].setBackgroundColor(Color.WHITE);
+						helpList.setDisplay(itemSelectedX,itemSelectedY,i,false);
+						break;
+					default:
+						break;
+				}
+				return;
 			}
 		}
 		
@@ -522,7 +592,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    	}
 	    	text.setText("-");
 	    	table.delete_value(itemSelectedX, itemSelectedY);
-	    	unselectItem();
+		    unselectItem();
 	    	break;
 	    }
 	    text_remaining.setText(String.valueOf(table.getRemaining()));
@@ -535,6 +605,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		itemSelectedX=9; itemSelectedY=9;
     	//reset background colors of all textView
 		setDefaultBackgroundColor();
+		for (BorderedTextView i : textHelp) i.setBackgroundColor(Color.DKGRAY);
 	}
 	
 	/**
