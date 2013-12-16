@@ -460,6 +460,7 @@ public class SudokuTable {
 				s_tab_base += String.valueOf(tab_base[i][j]);
 			}
 		}
+		String hl = helpList.toString();
 		
 		/*Log.d(TAG, "s_tab size = "+s_tab.length());
 		Log.d(TAG, s_tab);
@@ -469,6 +470,7 @@ public class SudokuTable {
 		set.add(s_tab);
 		set.add(s_tab_base);
 		set.add(String.valueOf(level));
+		set.add(hl);
 		
 		SharedPreferences.Editor SPE = SP.edit();
 		SPE.putStringSet("gameSaved", set).commit();
@@ -500,6 +502,9 @@ public class SudokuTable {
 				break;
 			case 2:
 				level = Integer.valueOf(str);
+				break;
+			case 729:
+				helpList.fromString(str);
 				break;
 			}
 		}

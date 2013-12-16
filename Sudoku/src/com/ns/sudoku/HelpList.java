@@ -1,10 +1,13 @@
 package com.ns.sudoku;
 
+import android.util.Log;
+
 /**
  * Created by Nicolas on 12/12/13.
  */
 public class HelpList {
 
+	private static final String TAG = "Sudoku_HelpList";
 	private int[][][] helpList = new int[9][9][9];
 
 	/*
@@ -54,9 +57,34 @@ public class HelpList {
 		for(int i=0;i<9;i++) helpList[x][y][i]=2;
 	}
 
+	@Override
+	public String toString(){
+		String str="";
 
+		for (int i=0;i<9;i++){
+			for (int j=0;j<9;j++){
+				for (int k=0;k<9;k++){
+					str+=String.valueOf(helpList[i][j][k]);
+				}
+			}
+		}
 
+		return str;
+	}
 
+	public void fromString(String str){
+		Log.d(TAG,"Restoring HelpList");
+		Log.d(TAG,str);
+		int index=0;
+		for (int i=0;i<9;i++){
+			for (int j=0;j<9;j++){
+				for (int k=0;k<9;k++){
+					helpList[i][j][k]=Integer.valueOf(str.substring(index,index+1));
+					index++;
+				}
+			}
+		}
+	}
 
 
 
