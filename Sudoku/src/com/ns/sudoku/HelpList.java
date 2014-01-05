@@ -13,9 +13,9 @@ public class HelpList {
 	/*
 
 	* Possible values for helpList :
-	* 0 - Possible value and not set in display
-	* 1 - Possible value and set in display
-	* 2 - Impossible value
+	* 0 - Possible value and not set in display (white)
+	* 1 - Possible value and set in display (green)
+	* 2 - Impossible value (grey)
 
 	*/
 

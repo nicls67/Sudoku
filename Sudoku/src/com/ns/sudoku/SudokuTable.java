@@ -297,8 +297,10 @@ public class SudokuTable {
 
 		//delete the set number in each helpbox of row, column and square
 		for (int i = 0; i<9; i++){
-			helpList.setPossible(i,y,val-1,!displayImpossibleValues);
-			helpList.setPossible(x,i,val-1,!displayImpossibleValues);
+            if (!isBase(i,y))
+			    helpList.setPossible(i,y,val-1,!displayImpossibleValues);
+            if (!isBase(x,i))
+			    helpList.setPossible(x,i,val-1,!displayImpossibleValues);
 		}
 		int a,b;
 		if(x<3)a=0;
@@ -309,7 +311,8 @@ public class SudokuTable {
 		else b=3;
 		for(int i=a;i<a+3;i++){
 			for(int j=b;j<b+3;j++){
-				helpList.setPossible(i,j,val-1,!displayImpossibleValues);
+                if (!isBase(i,j))
+				    helpList.setPossible(i,j,val-1,!displayImpossibleValues);
 			}
 		}
 
@@ -558,7 +561,7 @@ public class SudokuTable {
 				displayImpossibleValues = SP.getBoolean("display_impossible_values", false);
 				for(int i=0;i<9;i++) {
 					for(int j=0;j<9;j++){
-						if (tab_base[i][j]==0)
+						if (tab[i][j]==0)
 							setHelpListBox(i,j);
 					}
 				}
