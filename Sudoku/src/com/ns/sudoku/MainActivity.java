@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -159,25 +160,49 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		textHelp[7] = (BorderedTextView) findViewById(R.id.textHelp8);
 		textHelp[8] = (BorderedTextView) findViewById(R.id.textHelp9);
 
-		borders = new Border[4];
-		borders[0] = new Border(BORDER_TOP);
-		borders[1] = new Border(BORDER_LEFT);
-		borders[2] = new Border(BORDER_RIGHT);
-		borders[3] = new Border(BORDER_BOTTOM);
-		borders[0].setWidth(8);
-		borders[1].setWidth(8);
-		borders[2].setWidth(8);
-		borders[3].setWidth(8);
-		textHelp[0].setBorders(borders);
-		borders = new Border[3];
-		borders[0] = new Border(BORDER_TOP);
-		borders[1] = new Border(BORDER_BOTTOM);
-		borders[2] = new Border(BORDER_RIGHT);
-		borders[0].setWidth(8);
-		borders[1].setWidth(8);
-		borders[2].setWidth(8);
-		for(int i=1;i<9;i++) textHelp[i].setBorders(borders);
-		for (BorderedTextView i : textHelp) i.setBackgroundColor(Color.DKGRAY);
+        if(getApplicationContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            borders = new Border[4];
+            borders[0] = new Border(BORDER_TOP);
+            borders[1] = new Border(BORDER_LEFT);
+            borders[2] = new Border(BORDER_RIGHT);
+            borders[3] = new Border(BORDER_BOTTOM);
+            borders[0].setWidth(8);
+            borders[1].setWidth(8);
+            borders[2].setWidth(8);
+            borders[3].setWidth(8);
+            textHelp[0].setBorders(borders);
+            borders = new Border[3];
+            borders[0] = new Border(BORDER_TOP);
+            borders[1] = new Border(BORDER_BOTTOM);
+            borders[2] = new Border(BORDER_RIGHT);
+            borders[0].setWidth(8);
+            borders[1].setWidth(8);
+            borders[2].setWidth(8);
+            for(int i=1;i<9;i++) textHelp[i].setBorders(borders);
+            for (BorderedTextView i : textHelp) i.setBackgroundColor(Color.DKGRAY);
+        }
+        else{
+            borders = new Border[4];
+            borders[0] = new Border(BORDER_TOP);
+            borders[1] = new Border(BORDER_LEFT);
+            borders[2] = new Border(BORDER_RIGHT);
+            borders[3] = new Border(BORDER_BOTTOM);
+            borders[0].setWidth(8);
+            borders[1].setWidth(8);
+            borders[2].setWidth(8);
+            borders[3].setWidth(8);
+            textHelp[0].setBorders(borders);
+            borders = new Border[3];
+            borders[0] = new Border(BORDER_LEFT);
+            borders[1] = new Border(BORDER_BOTTOM);
+            borders[2] = new Border(BORDER_RIGHT);
+            borders[0].setWidth(8);
+            borders[1].setWidth(8);
+            borders[2].setWidth(8);
+            for(int i=1;i<9;i++) textHelp[i].setBorders(borders);
+            for (BorderedTextView i : textHelp) i.setBackgroundColor(Color.DKGRAY);
+        }
+
 
 
 		//assign buttons
