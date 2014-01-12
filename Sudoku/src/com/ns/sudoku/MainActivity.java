@@ -11,6 +11,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
@@ -43,7 +44,30 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private static final int BORDER_BOTTOM = 0x00000004;
 	private static final int BORDER_LEFT = 0x00000008;
     private Border[] borders = null;
-	
+
+    //for timer
+    TextView timerTextView;
+    long startTime = 0;
+    long curTime = 0;
+    Handler timerHandler = new Handler();
+    Runnable timerRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+            long millis = System.currentTimeMillis() - startTime;
+            curTime = millis;
+            int seconds = (int) (millis / 1000);
+            int minutes = seconds / 60;
+            seconds = seconds % 60;
+
+            timerTextView.setText(String.format("%d:%02d", minutes, seconds));
+
+            timerHandler.postDelayed(this, 500);
+        }
+    };
+
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -251,7 +275,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		text_remaining = (TextView) findViewById(R.id.boxes_remaining);
 		
 		generate();
-		
+
+        /*
+        create timer
+         */
+        timerTextView = (TextView) findViewById(R.id.timer);
+        //startTime = System.currentTimeMillis();
+		timerHandler.postDelayed(timerRunnable,0);
 	}
 
 	@Override
@@ -400,7 +430,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 					setDefaultBackgroundColor();
 					
 					ColorizeBlocks(i,j);
-						
+
 					textTab[i][j].setBackgroundColor(Color.YELLOW);
 
 					int[] help = helpList.getState(i,j);
@@ -846,6 +876,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
     	super.onPause();
     	table.save();
     	Log.d(TAG, "MainActivity paused");
+        timerHandler.removeCallbacks(timerRunnable);
+        SharedPreferences.Editor SPE = SP.edit();
+        SPE.putLong("timer",curTime).commit();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        Log.d(TAG,"MainActivity resumed");
+        timerHandler.postDelayed(timerRunnable,0);
+        startTime = System.currentTimeMillis() - curTime;
     }
     
     
