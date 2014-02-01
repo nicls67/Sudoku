@@ -381,7 +381,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	* Generate a sudoku table and update display
 	 */
 	private void generate(){
-		Log.d(TAG, "difficulty = "+difficulty);
+		Log.d(TAG, "difficulty = " + difficulty);
 		//fetch difficulty
 		if(difficulty.equals("DEB"))
 			table.setLevel(difficultyValue[0]);
@@ -395,6 +395,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		
 		if(difficulty.equals("RESUME")){
 			table.load();
+
 			if(table.getLevel()==difficultyValue[0])
 				difficulty="DEB";
 			else if(table.getLevel()==difficultyValue[1])
@@ -403,6 +404,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				difficulty="MEDIUM";
 			else if(table.getLevel()==difficultyValue[3])
 				difficulty="HARD";
+
+			curTime = SP.getLong("timer",0);
 		}
 		else
 			table.build();
@@ -670,6 +673,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		if(!table.isEnd())
 			return;
 
+
+
+		//new game
 		Log.d(TAG, "Game finished");
 		AlertDialog.Builder dialogEnd = new AlertDialog.Builder(this);
 		dialogEnd.setTitle("Partie terminée !");
@@ -884,7 +890,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     public void onResume(){
         super.onResume();
-        Log.d(TAG,"MainActivity resumed");
+        Log.d(TAG, "MainActivity resumed");
         timerHandler.postDelayed(timerRunnable,0);
         startTime = System.currentTimeMillis() - curTime;
     }
